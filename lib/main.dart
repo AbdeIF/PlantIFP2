@@ -115,6 +115,16 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
   }
 }
 
+
+
+
+// ============================================================================================
+
+//                                        SEGUNDA TELA
+
+// ============================================================================================
+
+
 class ContentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
