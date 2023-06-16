@@ -535,6 +535,10 @@ class ContentScreen extends StatelessWidget {
           ),
         ],
       ),
+      bottomNavigationBar: BottomNavigationBar(items: [
+        BottomNavigationBarItem(icon: Icon(Icons.camera), label: 'um'),
+        BottomNavigationBarItem(icon: Icon(Icons.access_alarm), label: 'um'),
+      ]),
     );
   }
 }
