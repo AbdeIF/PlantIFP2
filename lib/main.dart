@@ -142,7 +142,7 @@ class ContentScreen extends StatelessWidget {
             left: 0,
             child: Container(
               width: screenWidth,
-              height: 269,
+              height: 219,
               decoration: BoxDecoration(
                 color: Color(0xFF459473),
                 borderRadius: BorderRadius.only(
@@ -172,7 +172,7 @@ class ContentScreen extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 115,
+            top: 95,
             left: 45,
             width: 261,
             height: 72,
@@ -182,7 +182,7 @@ class ContentScreen extends StatelessWidget {
                   TextSpan(
                     text: 'Explore ',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                       decoration: TextDecoration.underline,
                       color: Colors.white,
@@ -192,7 +192,7 @@ class ContentScreen extends StatelessWidget {
                   TextSpan(
                     text: 'e ',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                       fontFamily: 'Inter',
@@ -201,7 +201,7 @@ class ContentScreen extends StatelessWidget {
                   TextSpan(
                     text: 'conheça\n',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                       decoration: TextDecoration.underline,
                       color: Colors.white,
@@ -211,7 +211,7 @@ class ContentScreen extends StatelessWidget {
                   TextSpan(
                     text: 'espécies de plantas\nno IFPI Campus Pedro II.',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                       fontFamily: 'Inter',
@@ -223,7 +223,7 @@ class ContentScreen extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 200,
+            top: 165,
             left: 45,
             width: 199,
             height: 42,
@@ -250,7 +250,7 @@ class ContentScreen extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 286,
+            top: 226,
             left: 20,
             right: 20,
             bottom: 2,
@@ -438,106 +438,82 @@ class ContentScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: screenWidth * 0.4,
-                        height: contentHeight * 0.4,
-                        decoration: BoxDecoration(
-                          color: Color(0xFF459473),
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color.fromRGBO(0, 0, 0, 0.25),
-                              blurRadius: 4,
-                              offset: Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Image.network(
-                                'images/plant.jpg',
-                                width: screenWidth * 0.4,
-                                height: contentHeight * 0.3,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            SizedBox(height: 10),
-                            Align(
-                              alignment: Alignment.topCenter,
-                              child: Container(
-                                child: Text(
-                                  'Planta',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        width: screenWidth * 0.4,
-                        height: contentHeight * 0.4,
-                        decoration: BoxDecoration(
-                          color: Color(0xFF459473),
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color.fromRGBO(0, 0, 0, 0.25),
-                              blurRadius: 4,
-                              offset: Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Image.network(
-                                'images/plant.jpg',
-                                width: screenWidth * 0.4,
-                                height: contentHeight * 0.3,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            SizedBox(height: 10),
-                            Align(
-                              alignment: Alignment.topCenter,
-                              child: Container(
-                                child: Text(
-                                  'Planta',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ),
           ),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                color: Color(0xFF459473),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromRGBO(0, 0, 0, 0.25),
+                    blurRadius: 4,
+                    offset: Offset(4, 0),
+                  ),
+                ],
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    child: Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 179, 5, 5),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
+                          bottomLeft: Radius.circular(20),
+                          bottomRight: Radius.circular(20)
+                        ),
+                        border: Border.all(color: Color.fromARGB(255, 255, 255, 255)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromRGBO(0, 0, 0, 0.25),
+                            blurRadius: 4,
+                            offset: Offset(4, 0),
+                          ),
+                        ],
+                      ),
+                      child: InkWell(
+                        onTap: () {
+                          // Lógica para lidar com o clique no botão
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.camera_alt,
+                              color: Colors.white,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+
+                ],
+              ),
+            ),
+          ),
+
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(items: [
-        BottomNavigationBarItem(icon: Icon(Icons.camera), label: 'um'),
-        BottomNavigationBarItem(icon: Icon(Icons.access_alarm), label: 'um'),
-      ]),
     );
   }
 }
