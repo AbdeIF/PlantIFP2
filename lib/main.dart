@@ -253,7 +253,7 @@ class ContentScreen extends StatelessWidget {
             top: 286,
             left: 20,
             right: 20,
-            bottom: 58,
+            bottom: 2,
             child: Container(
               color: Colors.white,
               child: ListView(
