@@ -124,7 +124,6 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
 
 // ============================================================================================
 
-
 class ContentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -252,20 +251,20 @@ class ContentScreen extends StatelessWidget {
           ),
           Positioned(
             top: 286,
-            left: 45,
-            right: 46,
-            bottom: 78,
+            left: 20,
+            right: 20,
+            bottom: 58,
             child: Container(
               color: Colors.white,
               child: ListView(
-                padding: EdgeInsets.symmetric(vertical: 20),
+                padding: EdgeInsets.symmetric(vertical: 0, horizontal: 2),
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        width: 150,
-                        height: 216,
+                        width: screenWidth * 0.4,
+                        height: contentHeight * 0.4,
                         decoration: BoxDecoration(
                           color: Color(0xFF459473),
                           borderRadius: BorderRadius.circular(20),
@@ -283,8 +282,8 @@ class ContentScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                               child: Image.network(
                                 'images/plant.jpg',
-                                width: 150,
-                                height: 184,
+                                width: screenWidth * 0.4,
+                                height: contentHeight * 0.3,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -306,8 +305,8 @@ class ContentScreen extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        width: 150,
-                        height: 216,
+                        width: screenWidth * 0.4,
+                        height: contentHeight * 0.4,
                         decoration: BoxDecoration(
                           color: Color(0xFF459473),
                           borderRadius: BorderRadius.circular(20),
@@ -325,8 +324,8 @@ class ContentScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                               child: Image.network(
                                 'images/plant.jpg',
-                                width: 150,
-                                height: 184,
+                                width: screenWidth * 0.4,
+                                height: contentHeight * 0.3,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -351,11 +350,11 @@ class ContentScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        width: 150,
-                        height: 216,
+                        width: screenWidth * 0.4,
+                        height: contentHeight * 0.4,
                         decoration: BoxDecoration(
                           color: Color(0xFF459473),
                           borderRadius: BorderRadius.circular(20),
@@ -373,8 +372,8 @@ class ContentScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                               child: Image.network(
                                 'images/plant.jpg',
-                                width: 150,
-                                height: 184,
+                                width: screenWidth * 0.4,
+                                height: contentHeight * 0.3,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -396,8 +395,8 @@ class ContentScreen extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        width: 150,
-                        height: 216,
+                        width: screenWidth * 0.4,
+                        height: contentHeight * 0.4,
                         decoration: BoxDecoration(
                           color: Color(0xFF459473),
                           borderRadius: BorderRadius.circular(20),
@@ -415,8 +414,8 @@ class ContentScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                               child: Image.network(
                                 'images/plant.jpg',
-                                width: 150,
-                                height: 184,
+                                width: screenWidth * 0.4,
+                                height: contentHeight * 0.3,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -441,11 +440,11 @@ class ContentScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        width: 150,
-                        height: 216,
+                        width: screenWidth * 0.4,
+                        height: contentHeight * 0.4,
                         decoration: BoxDecoration(
                           color: Color(0xFF459473),
                           borderRadius: BorderRadius.circular(20),
@@ -463,8 +462,8 @@ class ContentScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                               child: Image.network(
                                 'images/plant.jpg',
-                                width: 150,
-                                height: 184,
+                                width: screenWidth * 0.4,
+                                height: contentHeight * 0.3,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -486,8 +485,8 @@ class ContentScreen extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        width: 150,
-                        height: 216,
+                        width: screenWidth * 0.4,
+                        height: contentHeight * 0.4,
                         decoration: BoxDecoration(
                           color: Color(0xFF459473),
                           borderRadius: BorderRadius.circular(20),
@@ -505,8 +504,8 @@ class ContentScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                               child: Image.network(
                                 'images/plant.jpg',
-                                width: 150,
-                                height: 184,
+                                width: screenWidth * 0.4,
+                                height: contentHeight * 0.3,
                                 fit: BoxFit.cover,
                               ),
                             ),
