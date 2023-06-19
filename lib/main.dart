@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'scanner.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 void main() {
   runApp(MyApp());
@@ -114,9 +116,6 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
     );
   }
 }
-
-
-
 
 // ============================================================================================
 
@@ -479,9 +478,10 @@ class ContentScreen extends StatelessWidget {
                           topLeft: Radius.circular(20),
                           topRight: Radius.circular(20),
                           bottomLeft: Radius.circular(20),
-                          bottomRight: Radius.circular(20)
+                          bottomRight: Radius.circular(20),
                         ),
-                        border: Border.all(color: Color.fromARGB(255, 255, 255, 255)),
+                        border: Border.all(
+                            color: Color.fromARGB(255, 255, 255, 255)),
                         boxShadow: [
                           BoxShadow(
                             color: Color.fromRGBO(0, 0, 0, 0.25),
@@ -492,8 +492,8 @@ class ContentScreen extends StatelessWidget {
                       ),
                       child: InkWell(
                         onTap: () {
-                          // Lógica para lidar com o clique no botão
-                        },
+                          QRCodePage().createState();
+                        }, // Chama o método para ler o código QR
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -506,12 +506,10 @@ class ContentScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-
                 ],
               ),
             ),
           ),
-
         ],
       ),
     );
