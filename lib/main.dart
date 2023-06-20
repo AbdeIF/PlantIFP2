@@ -482,13 +482,21 @@ class ContentScreen extends StatelessWidget {
                     ),
                     child: InkWell(
                       onTap: () {
-                        QRCodePage().createState();
-                      }, // Chama o método para ler o código QR
-                      child: Center(
-                        child: Icon(
-                          Icons.camera_alt,
-                          color: Colors.white,
-                        ),
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => QRCodePage(),
+                          ),
+                        );
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.camera_alt,
+                            color: Colors.white,
+                          ),
+                        ],
                       ),
                     ),
                   ),
