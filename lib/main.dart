@@ -495,10 +495,10 @@ class ContentScreen extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => QRCodePage()),
+                              builder: (context) => QRCodePage(),
+                            ),
                           );
                         }, // Chama o método para ler o código QR
-                        // QRCodePage().createState();
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
