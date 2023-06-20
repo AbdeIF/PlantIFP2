@@ -279,7 +279,7 @@ class ContentScreen extends StatelessWidget {
                           children: [
                             ClipRRect(
                               borderRadius: BorderRadius.circular(20),
-                              child: Image.network(
+                              child: Image.asset(
                                 'images/plant.jpg',
                                 width: screenWidth * 0.4,
                                 height: contentHeight * 0.3,
@@ -321,7 +321,7 @@ class ContentScreen extends StatelessWidget {
                           children: [
                             ClipRRect(
                               borderRadius: BorderRadius.circular(20),
-                              child: Image.network(
+                              child: Image.asset(
                                 'images/plant.jpg',
                                 width: screenWidth * 0.4,
                                 height: contentHeight * 0.3,
@@ -369,7 +369,7 @@ class ContentScreen extends StatelessWidget {
                           children: [
                             ClipRRect(
                               borderRadius: BorderRadius.circular(20),
-                              child: Image.network(
+                              child: Image.asset(
                                 'images/plant.jpg',
                                 width: screenWidth * 0.4,
                                 height: contentHeight * 0.3,
@@ -411,7 +411,7 @@ class ContentScreen extends StatelessWidget {
                           children: [
                             ClipRRect(
                               borderRadius: BorderRadius.circular(20),
-                              child: Image.network(
+                              child: Image.asset(
                                 'images/plant.jpg',
                                 width: screenWidth * 0.4,
                                 height: contentHeight * 0.3,
@@ -465,49 +465,29 @@ class ContentScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Positioned(
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    child: Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 179, 5, 5),
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20),
-                          bottomLeft: Radius.circular(20),
-                          bottomRight: Radius.circular(20),
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 179, 5, 5),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: Colors.white),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color.fromRGBO(0, 0, 0, 0.25),
+                          blurRadius: 4,
+                          offset: Offset(4, 0),
                         ),
-                        border: Border.all(
-                            color: Color.fromARGB(255, 255, 255, 255)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color.fromRGBO(0, 0, 0, 0.25),
-                            blurRadius: 4,
-                            offset: Offset(4, 0),
-                          ),
-                        ],
-                      ),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => QRCodePage(),
-                            ),
-                          );
-                        }, // Chama o método para ler o código QR
-                        // QRCodePage().createState();
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.camera_alt,
-                              color: Colors.white,
-                            ),
-                          ],
+                      ],
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        QRCodePage().createState();
+                      }, // Chama o método para ler o código QR
+                      child: Center(
+                        child: Icon(
+                          Icons.camera_alt,
+                          color: Colors.white,
                         ),
                       ),
                     ),
