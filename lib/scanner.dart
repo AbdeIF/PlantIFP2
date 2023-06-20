@@ -12,7 +12,7 @@ class _QRCodePageState extends State<QRCodePage> {
   String ticket = '';
   List<String> tickets = [];
 
-  readQRCode() async {
+  void readQRCode() async {
     String code = await FlutterBarcodeScanner.scanBarcode(
       "#FFFFFF",
       "Cancelar",
@@ -38,6 +38,29 @@ class _QRCodePageState extends State<QRCodePage> {
 
   @override
   Widget build(BuildContext context) {
-    return readQRCode();
+    return Scaffold(
+      body: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            if (ticket != '')
+              Padding(
+                padding: const EdgeInsets.only(bottom: 24.0),
+                child: Text(
+                  'Ticket: $ticket',
+                  style: const TextStyle(fontSize: 20),
+                ),
+              ),
+            ElevatedButton.icon(
+              onPressed: readQRCode,
+              icon: const Icon(Icons.qr_code),
+              label: const Text('Validar'),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
