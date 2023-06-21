@@ -12,6 +12,12 @@ class _QRCodePageState extends State<QRCodePage> {
   String ticket = '';
   List<String> tickets = [];
 
+  @override
+  void initState() {
+    super.initState();
+    readQRCode();
+  }
+
   void readQRCode() async {
     String code = await FlutterBarcodeScanner.scanBarcode(
       "#FFFFFF",
@@ -53,11 +59,11 @@ class _QRCodePageState extends State<QRCodePage> {
                   style: const TextStyle(fontSize: 20),
                 ),
               ),
-            ElevatedButton.icon(
-              onPressed: readQRCode,
-              icon: const Icon(Icons.qr_code),
-              label: const Text('Validar'),
-            ),
+            // ElevatedButton.icon(
+            //   onPressed: readQRCode,
+            //   icon: const Icon(Icons.qr_code),
+            //   label: const Text('Validar'),
+            // ),
           ],
         ),
       ),
