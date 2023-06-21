@@ -134,14 +134,26 @@ class TelaCatalogo extends StatelessWidget {
             child: Container(
               color: Colors.white,
               child: ListView(
-                padding: EdgeInsets.symmetric(vertical: 0, horizontal: 2),
+                padding: EdgeInsets.symmetric(vertical: 55, horizontal: 2),
                 children: [
+                  Container(
+                    margin: EdgeInsets.only(top: 00, bottom: 10),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Plantas:',
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF459473),
+                      ),
+                    ),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
                         width: screenWidth * 0.4,
-                        height: contentHeight * 0.4,
+                        height: contentHeight * 0.35,
                         decoration: BoxDecoration(
                           color: Color(0xFF459473),
                           borderRadius: BorderRadius.circular(20),
@@ -183,7 +195,7 @@ class TelaCatalogo extends StatelessWidget {
                       ),
                       Container(
                         width: screenWidth * 0.4,
-                        height: contentHeight * 0.4,
+                        height: contentHeight * 0.35,
                         decoration: BoxDecoration(
                           color: Color(0xFF459473),
                           borderRadius: BorderRadius.circular(20),
@@ -231,7 +243,7 @@ class TelaCatalogo extends StatelessWidget {
                     children: [
                       Container(
                         width: screenWidth * 0.4,
-                        height: contentHeight * 0.4,
+                        height: contentHeight * 0.35,
                         decoration: BoxDecoration(
                           color: Color(0xFF459473),
                           borderRadius: BorderRadius.circular(20),
@@ -273,7 +285,7 @@ class TelaCatalogo extends StatelessWidget {
                       ),
                       Container(
                         width: screenWidth * 0.4,
-                        height: contentHeight * 0.4,
+                        height: contentHeight * 0.35,
                         decoration: BoxDecoration(
                           color: Color(0xFF459473),
                           borderRadius: BorderRadius.circular(20),

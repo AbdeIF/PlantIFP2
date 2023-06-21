@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plantifpi/scanner.dart';
 import 'TelaCarregamento.dart';
 
 void main() {
@@ -13,4 +14,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
