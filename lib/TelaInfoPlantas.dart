@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:plantifpi/scanner.dart';
 
-class TelaCatalogo extends StatelessWidget {
+class TelaPlanta extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
@@ -79,7 +79,8 @@ class TelaCatalogo extends StatelessWidget {
                 SizedBox(height: 16), // Espaçamento entre a imagem e o texto
                 Expanded(
                   child: Container(
-                    height: contentHeight - 400, // Defina uma altura para o ListView
+                    height: contentHeight -
+                        400, // Defina uma altura para o ListView
                     child: ListView(
                       padding: EdgeInsets.only(left: 35, right: 35),
                       children: [
@@ -165,69 +166,6 @@ class TelaCatalogo extends StatelessWidget {
                   ),
                 ),
               ],
-            ),
-          ),
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: Container(
-              width: 60,
-              height: 60,
-              decoration: BoxDecoration(
-                color: Color(0xFF459473),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Color.fromRGBO(0, 0, 0, 0.25),
-                    blurRadius: 4,
-                    offset: Offset(4, 0),
-                  ),
-                ],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 179, 5, 5),
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.white),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color.fromRGBO(0, 0, 0, 0.25),
-                          blurRadius: 4,
-                          offset: Offset(4, 0),
-                        ),
-                      ],
-                    ),
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => QRCodePage(),
-                          ),
-                        );
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.camera_alt,
-                            color: Colors.white,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
             ),
           ),
         ],
