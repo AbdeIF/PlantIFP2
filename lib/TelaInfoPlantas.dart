@@ -6,7 +6,7 @@ class TelaPlanta extends StatelessWidget {
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
-    final double contentHeight = screenHeight - 78;
+    final double contentHeight = screenHeight;
 
     return Scaffold(
       body: Stack(
@@ -54,12 +54,12 @@ class TelaPlanta extends StatelessWidget {
             top: 119, // Ajuste a posição inicial do conteúdo principal
             left: 0,
             right: 0,
-            bottom: 60,
+            bottom: 0,
             child: Column(
               children: [
                 Container(
                   height: contentHeight -
-                      400, // Defina a altura para ocupar metade da tela
+                      500, // Defina a altura para ocupar metade da tela
                   child: Container(
                     margin: EdgeInsets.only(
                         left: 35,
@@ -79,16 +79,14 @@ class TelaPlanta extends StatelessWidget {
                 SizedBox(height: 16), // Espaçamento entre a imagem e o texto
                 Expanded(
                   child: Container(
-                    height: contentHeight -
-                        400, // Defina uma altura para o ListView
+                    height: contentHeight, // Defina uma altura para o ListView
                     child: ListView(
-                      padding: EdgeInsets.only(left: 35, right: 35),
+                      padding: EdgeInsets.only(left: 35, right: 35, bottom: 0),
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              margin: EdgeInsets.only(top: 10),
                               alignment: Alignment.centerLeft,
                               child: Text(
                                 'Planta',
@@ -148,7 +146,7 @@ class TelaPlanta extends StatelessWidget {
                               ),
                             ),
                             Container(
-                              margin: EdgeInsets.only(top: 10, bottom: 35),
+                              margin: EdgeInsets.only(top: 10),
                               alignment: Alignment.centerLeft,
                               child: Text(
                                 'Baixa.',

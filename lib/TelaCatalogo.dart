@@ -136,11 +136,11 @@ class TelaCatalogo extends StatelessWidget {
                 top: 226,
                 left: 20,
                 right: 20,
-                bottom: 2,
+                bottom: 55,
                 child: Container(
                   color: Colors.white,
                   child: ListView(
-                    padding: EdgeInsets.symmetric(vertical: 55, horizontal: 2),
+                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 2),
                     children: [
                       Container(
                         margin: EdgeInsets.only(top: 00, bottom: 10),
