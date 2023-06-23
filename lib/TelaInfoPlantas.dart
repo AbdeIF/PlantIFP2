@@ -51,35 +51,43 @@ class TelaPlanta extends StatelessWidget {
           ),
           Positioned(
             // Conteúdo principal
-            top: 119, // Ajuste a posição inicial do conteúdo principal
+            top: 119,
             left: 0,
             right: 0,
             bottom: 0,
             child: Column(
               children: [
-                Container(
-                  height: contentHeight -
-                      500, // Defina a altura para ocupar metade da tela
+                Expanded(
+                  flex: 1,
                   child: Container(
-                    margin: EdgeInsets.only(
-                        left: 35,
-                        top: 35,
-                        right: 35), // Margem de 45 pixels em todos os lados
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                          20), // Arredondamento de 20 pixels nas bordas
+                      image: DecorationImage(
+                        image: AssetImage('images/plant.jpg'),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: BorderRadius.circular(20),
                     ),
-                    child: Image.asset(
-                      'images/plant.jpg',
-                      width: screenWidth,
-                      fit: BoxFit.cover,
+                    child: AspectRatio(
+                      aspectRatio: 1,
+                      child: Container(
+                        margin: EdgeInsets.all(3),
+                        // Remova a linha abaixo, pois a imagem agora está definida como plano de fundo
+                        // decoration: BoxDecoration(
+                        //   borderRadius: BorderRadius.circular(20),
+                        // ),
+                        // Remova também a linha abaixo, pois o Image.asset não é mais necessário
+                        // child: Image.asset(
+                        //   'images/plant.jpg',
+                        //   fit: BoxFit.cover,
+                        // ),
+                      ),
                     ),
                   ),
                 ),
-                SizedBox(height: 16), // Espaçamento entre a imagem e o texto
+                SizedBox(height: 16),
                 Expanded(
+                  flex: 1,
                   child: Container(
-                    height: contentHeight, // Defina uma altura para o ListView
                     child: ListView(
                       padding: EdgeInsets.only(left: 35, right: 35, bottom: 0),
                       children: [
