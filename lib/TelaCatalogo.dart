@@ -5,8 +5,7 @@ import 'TelaInfoPlantas.dart';
 class TelaCatalogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    debugShowCheckedModeBanner:
-    false;
+    debugShowCheckedModeBanner:false;
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
     final double contentHeight = screenHeight - 78;
