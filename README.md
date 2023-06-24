@@ -1,6 +1,5 @@
 <h1 align="center">PlantIFP2</p>
 <img align="center" src="https://i.ibb.co/9qc1G6p/Plantif.png" width="700px">
-<h3 align="center"><a href="https://ruanvcg.github.io/Portfolio">Acesse o portfolio</a></h3>
 
 ## 💻 Tecnologias
 
