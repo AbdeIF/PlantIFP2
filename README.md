@@ -1,16 +1,47 @@
-# plantifpi
+<h1 align="center">PlantIFP2</p>
+<img align="center" src="https://i.ibb.co/9qc1G6p/Plantif.png" width="700px">
+<h3 align="center"><a href="https://ruanvcg.github.io/Portfolio">Acesse o portfolio</a></h3>
 
-A new Flutter project.
+## 💻 Tecnologias
 
-## Getting Started
+- Design: [Projeto Figma](https://www.figma.com/file/nXCibRBFWR8COvMyhpkgrn/PortFolio?type=design&node-id=0%3A1&t=Kd1b7Ahvfib1OPYm-1)
+- Flutter;
+- Dart;
 
-This project is a starting point for a Flutter application.
+## 🤝 Como contribuir?
 
-A few resources to get you started if this is your first Flutter project:
+```bash
+    # 1. Fork the project;
+    # 2. Clone your forked project to you workspace;
+    # 3. Before your changes, realize the pull request;
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 👨‍💻 Autores
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/ruanvcg">
+        <img src="https://avatars.githubusercontent.com/u/62728646?v=4" width="100px;" alt="Foto do Ruan Victor no GitHub"/><br>
+        <sub>
+          <b>Ruan Victor</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/AbdeIF">
+        <img src="https://avatars.githubusercontent.com/u/126293962?v=4" width="100px;" alt="Foto do AbdeIF no GitHub"/><br>
+        <sub>
+          <b>Abdenaide</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/brunolimapinheiro">
+        <img src="https://avatars.githubusercontent.com/u/125039158?v=4" width="100px;" alt="Foto do Bruno Lima no GitHub"/><br>
+        <sub>
+          <b>Bruno Lima</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
