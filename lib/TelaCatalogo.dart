@@ -1,3 +1,4 @@
+import 'package:PlantIFP2/widgets/card.dart';
 import 'package:flutter/material.dart';
 import 'scanner.dart';
 import 'TelaInfoPlantas.dart';
@@ -57,7 +58,7 @@ class TelaCatalogo extends StatelessWidget {
               ),
               Positioned(
                 top: 95,
-                left: 45,
+                left: 33,
                 width: 261,
                 height: 72,
                 child: RichText(
@@ -107,8 +108,8 @@ class TelaCatalogo extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: 165,
-                left: 45,
+                top: 160,
+                left: 33,
                 width: 199,
                 height: 42,
                 child: Material(
@@ -155,244 +156,44 @@ class TelaCatalogo extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => TelaPlanta(),
-                                ),
-                              );
-                            },
-                            child: Container(
-                              width: screenWidth * 0.4,
-                              height: contentHeight * 0.35,
-                              decoration: BoxDecoration(
-                                color: Color(0xFF459473),
-                                borderRadius: BorderRadius.circular(20),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Color.fromRGBO(0, 0, 0, 0.25),
-                                    blurRadius: 4,
-                                    offset: Offset(0, 4),
+                      Container(
+                        height: contentHeight * 0.35,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => TelaPlanta(img: 'images/plants/nim.jpg', nomePopular: 'Nim', nomeCientifico: 'nomeCientifico', descricao: 'descricao', periculosidade: 'periculosidade'),
                                   ),
-                                ],
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Expanded(
-                                    flex: 5,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(20),
-                                      child: Image.asset(
-                                        'images/plant.jpg',
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(height: 10),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Align(
-                                      alignment: Alignment.topCenter,
-                                      child: Container(
-                                        child: Text(
-                                          'Planta',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                );
+                              },
+                              child: CardWidget(img: 'images/plants/nim.jpg', nomePopular: 'Nim')
                             ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => TelaPlanta(),
-                                ),
-                              );
-                            },
-                            child: Container(
-                              width: screenWidth * 0.4,
-                              height: contentHeight * 0.35,
-                              decoration: BoxDecoration(
-                                color: Color(0xFF459473),
-                                borderRadius: BorderRadius.circular(20),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Color.fromRGBO(0, 0, 0, 0.25),
-                                    blurRadius: 4,
-                                    offset: Offset(0, 4),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => TelaPlanta(img: 'images/plants/cannabis.jpg', nomePopular: 'Maconha', nomeCientifico: 'Cannabis', descricao: 'descricao', periculosidade: 'periculosidade'),
                                   ),
-                                ],
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Expanded(
-                                    flex: 5,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(20),
-                                      child: Image.asset(
-                                        'images/plant.jpg',
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(height: 10),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Align(
-                                      alignment: Alignment.topCenter,
-                                      child: Container(
-                                        child: Text(
-                                          'Planta',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                );
+                              },
+                              child: CardWidget(img: 'images/plants/cannabis.jpg', nomePopular: 'Maconha')
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                       SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => TelaPlanta(),
-                                ),
-                              );
-                            },
-                            child: Container(
-                              width: screenWidth * 0.4,
-                              height: contentHeight * 0.35,
-                              decoration: BoxDecoration(
-                                color: Color(0xFF459473),
-                                borderRadius: BorderRadius.circular(20),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Color.fromRGBO(0, 0, 0, 0.25),
-                                    blurRadius: 4,
-                                    offset: Offset(0, 4),
-                                  ),
-                                ],
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Expanded(
-                                    flex: 5,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(20),
-                                      child: Image.asset(
-                                        'images/plant.jpg',
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(height: 10),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Align(
-                                      alignment: Alignment.topCenter,
-                                      child: Container(
-                                        child: Text(
-                                          'Planta',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => TelaPlanta(),
-                                ),
-                              );
-                            },
-                            child: Container(
-                              width: screenWidth * 0.4,
-                              height: contentHeight * 0.35,
-                              decoration: BoxDecoration(
-                                color: Color(0xFF459473),
-                                borderRadius: BorderRadius.circular(20),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Color.fromRGBO(0, 0, 0, 0.25),
-                                    blurRadius: 4,
-                                    offset: Offset(0, 4),
-                                  ),
-                                ],
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Expanded(
-                                    flex: 5,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(20),
-                                      child: Image.asset(
-                                        'images/plant.jpg',
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(height: 10),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Align(
-                                      alignment: Alignment.topCenter,
-                                      child: Container(
-                                        child: Text(
-                                          'Planta',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
+                      Container(
+                        height: contentHeight * 0.35,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -433,12 +234,17 @@ class TelaCatalogo extends StatelessWidget {
                             BoxShadow(
                               color: Color.fromRGBO(0, 0, 0, 0.25),
                               blurRadius: 4,
-                              offset: Offset(4, 0),
+                              offset: Offset(0, 4),
                             ),
                           ],
                         ),
-                        child: InkWell(
-                          onTap: () {
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.qr_code_scanner,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                          onPressed: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -446,15 +252,6 @@ class TelaCatalogo extends StatelessWidget {
                               ),
                             );
                           },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.camera_alt,
-                                color: Colors.white,
-                              ),
-                            ],
-                          ),
                         ),
                       ),
                     ],

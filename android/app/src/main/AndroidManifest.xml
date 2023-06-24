@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.dev.ifpicom.example.plantifpi">
    <application
-        android:label="plantifpi"
+        android:label="PlantIFP2"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

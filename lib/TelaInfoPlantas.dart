@@ -1,7 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:plantifpi/scanner.dart';
+import 'package:PlantIFP2/scanner.dart';
 
 class TelaPlanta extends StatelessWidget {
+  final String img;
+  final String nomePopular;
+  final String nomeCientifico;
+  final String descricao;
+  final String periculosidade;
+
+  const TelaPlanta({
+    Key? key,
+    required this.img,
+    required this.nomePopular,
+    required this.nomeCientifico,
+    required this.descricao,
+    required this.periculosidade,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
@@ -18,6 +33,7 @@ class TelaPlanta extends StatelessWidget {
             // Menu Superior
             top: 0,
             left: 0,
+            
             child: Container(
               width: screenWidth,
               height: 119,
@@ -51,21 +67,23 @@ class TelaPlanta extends StatelessWidget {
           ),
           Positioned(
             // Conteúdo principal
-            top: 119,
+            
+            top: 129,
             left: 0,
             right: 0,
             bottom: 0,
             child: Column(
+              
               children: [
                 Expanded(
                   flex: 1,
                   child: Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage('images/plant.jpg'),
+                        
+                        image: AssetImage(img),
                         fit: BoxFit.cover,
                       ),
-                      borderRadius: BorderRadius.circular(20),
                     ),
                     child: AspectRatio(
                       aspectRatio: 1,
@@ -97,7 +115,7 @@ class TelaPlanta extends StatelessWidget {
                             Container(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                'Planta',
+                                nomePopular,
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
@@ -109,7 +127,7 @@ class TelaPlanta extends StatelessWidget {
                               margin: EdgeInsets.only(top: 10),
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                'Nome Científico',
+                                nomeCientifico,
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.normal,
@@ -133,7 +151,7 @@ class TelaPlanta extends StatelessWidget {
                               margin: EdgeInsets.only(top: 10),
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                'Lorem ipsum nulla per suscipit orci nullam pretium proin sagittis, gravida hac platea rhoncus porttitor varius faucibus curae urna, nisi orci aliquam hendrerit sed pellentesque at nec. per fames cubilia aliquet sollicitudin integer.',
+                                descricao,
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.normal,
@@ -157,7 +175,7 @@ class TelaPlanta extends StatelessWidget {
                               margin: EdgeInsets.only(top: 10),
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                'Baixa.',
+                                periculosidade,
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.normal,
