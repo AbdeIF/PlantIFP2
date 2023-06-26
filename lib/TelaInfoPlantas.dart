@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:PlantIFP2/scanner.dart';
 
 class TelaPlanta extends StatelessWidget {
   final String img;

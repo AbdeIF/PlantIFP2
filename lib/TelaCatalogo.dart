@@ -1,3 +1,4 @@
+import 'package:PlantIFP2/TelaTutorial.dart';
 import 'package:PlantIFP2/widgets/card.dart';
 import 'package:flutter/material.dart';
 import 'scanner.dart';
@@ -119,7 +120,12 @@ class TelaCatalogo extends StatelessWidget {
                   shadowColor: Color.fromRGBO(0, 0, 0, 0.25),
                   child: InkWell(
                     onTap: () {
-                      // Lógica para lidar com o clique no botão
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TelaTutorial(),
+                        ),
+                      );
                     },
                     child: Center(
                       child: Text(
@@ -240,7 +246,7 @@ class TelaCatalogo extends StatelessWidget {
                         ),
                         child: IconButton(
                           icon: Icon(
-                            Icons.qr_code_scanner,
+                            Icons.camera_alt,
                             color: Colors.white,
                             size: 20,
                           ),
