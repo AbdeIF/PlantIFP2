@@ -59,29 +59,22 @@ class TelaPlanta extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 1,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('images/plant.jpg'),
-                        fit: BoxFit.cover,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage('images/plant.jpg'),
+                              fit: BoxFit.cover,
+                            ),
+                            // borderRadius: BorderRadius.circular(0),
+                          ),
+                          // Ajuste o tamanho da imagem definindo a largura desejada
+                          width: screenWidth / 2,
+                        ),
                       ),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: AspectRatio(
-                      aspectRatio: 1,
-                      child: Container(
-                        margin: EdgeInsets.all(3),
-                        // Remova a linha abaixo, pois a imagem agora está definida como plano de fundo
-                        // decoration: BoxDecoration(
-                        //   borderRadius: BorderRadius.circular(20),
-                        // ),
-                        // Remova também a linha abaixo, pois o Image.asset não é mais necessário
-                        // child: Image.asset(
-                        //   'images/plant.jpg',
-                        //   fit: BoxFit.cover,
-                        // ),
-                      ),
-                    ),
+                    ],
                   ),
                 ),
                 SizedBox(height: 16),
