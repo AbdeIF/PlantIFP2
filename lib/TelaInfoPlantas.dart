@@ -32,7 +32,6 @@ class TelaPlanta extends StatelessWidget {
             // Menu Superior
             top: 0,
             left: 0,
-            
             child: Container(
               width: screenWidth,
               height: 119,
@@ -66,20 +65,17 @@ class TelaPlanta extends StatelessWidget {
           ),
           Positioned(
             // Conteúdo principal
-            
             top: 129,
             left: 0,
             right: 0,
             bottom: 0,
             child: Column(
-              
               children: [
                 Expanded(
                   flex: 1,
                   child: Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        
                         image: AssetImage(img),
                         fit: BoxFit.cover,
                       ),
@@ -88,15 +84,6 @@ class TelaPlanta extends StatelessWidget {
                       aspectRatio: 1,
                       child: Container(
                         margin: EdgeInsets.all(3),
-                        // Remova a linha abaixo, pois a imagem agora está definida como plano de fundo
-                        // decoration: BoxDecoration(
-                        //   borderRadius: BorderRadius.circular(20),
-                        // ),
-                        // Remova também a linha abaixo, pois o Image.asset não é mais necessário
-                        // child: Image.asset(
-                        //   'images/plant.jpg',
-                        //   fit: BoxFit.cover,
-                        // ),
                       ),
                     ),
                   ),
