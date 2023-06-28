@@ -52,16 +52,21 @@ class TelaTutorial extends StatelessWidget {
           ),
           Positioned(
             // Conteúdo principal
-
-            top: 129,
+            top: 119,
             left: 0,
             right: 0,
-            bottom: 0,
-            child: Column(
+            bottom: 60, // Descontar a altura do botão inferior
+
+            child: ListView(
+              padding: const EdgeInsets.all(0),
               children: [
                 Container(
                   margin: const EdgeInsets.only(
-                      left: 0, top: 15, right: 135, bottom: 0),
+                    left: 35,
+                    right: 35,
+                    top: 15,
+                    bottom: 0,
+                  ),
                   child: Text(
                     'Como Começar?',
                     style: const TextStyle(
@@ -82,7 +87,7 @@ class TelaTutorial extends StatelessWidget {
                     ),
                     child: Image.asset(
                       'images/help.png',
-                      width: 400,
+                      width: 390,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -90,10 +95,12 @@ class TelaTutorial extends StatelessWidget {
                 SizedBox(height: 16),
                 Container(
                   margin: const EdgeInsets.only(top: 10, left: 35, right: 35),
+                  padding: EdgeInsets.all(1),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Container(
+                        margin: EdgeInsets.all(5),
                         width: 25,
                         child: Text(
                           '1.',
@@ -107,14 +114,15 @@ class TelaTutorial extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        width: 280,
+                        width: screenWidth - 109,
                         child: Text(
                           'Procure um dos QR Codes espalhados pelo campus ou acesse o catálogo na tela inicial do app.',
                           style: const TextStyle(
-                            fontSize: 14,
+                            fontSize: 11,
                             fontWeight: FontWeight.normal,
                             color: Colors.black,
                           ),
+                          softWrap: true,
                           maxLines: 5,
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.justify,
@@ -124,7 +132,7 @@ class TelaTutorial extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: 30, left: 35, right: 35),
+                  margin: const EdgeInsets.only(top: 20, left: 35, right: 35),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -142,11 +150,11 @@ class TelaTutorial extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        width: 280,
+                        width: screenWidth - 109,
                         child: Text(
                           'Clique no botão vermelho com ícone de câmera para abrir o leitor e aponte para um QR Code.',
                           style: const TextStyle(
-                            fontSize: 14,
+                            fontSize: 11,
                             fontWeight: FontWeight.normal,
                             color: Colors.black,
                           ),
@@ -159,7 +167,7 @@ class TelaTutorial extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: 30, left: 35, right: 35),
+                  margin: const EdgeInsets.only(top: 20, left: 35, right: 35),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -177,11 +185,11 @@ class TelaTutorial extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        width: 280,
+                        width: screenWidth - 109,
                         child: Text(
                           'Pronto :). Agora tire suas dúvidas e faça suas anotações sobre a espécie de planta que encontrou.',
                           style: const TextStyle(
-                            fontSize: 14,
+                            fontSize: 11,
                             fontWeight: FontWeight.normal,
                             color: Colors.black,
                           ),
