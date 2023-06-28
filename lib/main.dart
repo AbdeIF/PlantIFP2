@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'TelaCarregamento.dart';
 
-void main() {
+void main() async {
   runApp(MyApp());
 }
 
