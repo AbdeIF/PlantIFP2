@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "945995286789",
+    "project_id": "plantifp2",
+    "storage_bucket": "plantifp2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:945995286789:android:574b227bfb8eb22d920f6c",
+        "android_client_info": {
+          "package_name": "br.dev.ifpicom.example.plantifpi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "945995286789-hpsn45i1a2dlthp8n2dl02b50pdpt2tb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTXwsYt_flTmTR-5DceGWnDQrPw9cI_SM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "945995286789-hpsn45i1a2dlthp8n2dl02b50pdpt2tb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'TelaCarregamento.dart';
+// import 'TelaCarregamento.dart';
+import 'login_page.dart';
 
-void main() {
+void main() async {
   runApp(MyApp());
 }
 
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: TelaCarregamento(),
+      home: CadastroPage(),
     );
   }
 }
