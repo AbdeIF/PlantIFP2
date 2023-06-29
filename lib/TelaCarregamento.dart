@@ -1,14 +1,16 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'login_page.dart';
 
-import 'TelaCatalogo.dart';
+//import 'TelaCatalogo.dart';
 
 class TelaCarregamento extends StatefulWidget {
   @override
   _TelaCarregamento createState() => _TelaCarregamento();
 }
 
-class _TelaCarregamento extends State<TelaCarregamento> with SingleTickerProviderStateMixin {
+class _TelaCarregamento extends State<TelaCarregamento>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<Color?> _colorAnimation;
 
@@ -27,7 +29,7 @@ class _TelaCarregamento extends State<TelaCarregamento> with SingleTickerProvide
     Timer(Duration(seconds: 5), () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => TelaCatalogo()),
+        MaterialPageRoute(builder: (context) => CadastroPage()),
       );
     });
   }
