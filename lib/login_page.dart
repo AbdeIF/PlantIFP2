@@ -16,6 +16,7 @@ class _CadastroPageState extends State<CadastroPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Login'),
+        backgroundColor: Color(0xFF459473),
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
@@ -26,6 +27,7 @@ class _CadastroPageState extends State<CadastroPage> {
               controller: emailController,
               decoration: InputDecoration(
                 labelText: 'Email',
+                border: OutlineInputBorder(),
               ),
             ),
             SizedBox(height: 16.0),
@@ -33,6 +35,7 @@ class _CadastroPageState extends State<CadastroPage> {
               controller: senhaController,
               decoration: InputDecoration(
                 labelText: 'Senha',
+                border: OutlineInputBorder(),
               ),
               obscureText: true,
             ),
@@ -70,6 +73,16 @@ class _CadastroPageState extends State<CadastroPage> {
                 }
               },
               child: Text('Login'),
+              style: ElevatedButton.styleFrom(
+                primary: Color(0xFF459473),
+                padding: EdgeInsets.symmetric(
+                  vertical: 12.0,
+                  horizontal: 24.0,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
             ),
           ],
         ),
