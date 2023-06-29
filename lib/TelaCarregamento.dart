@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'login_page.dart';
+import 'TelaCatalogo.dart';
 
 //import 'TelaCatalogo.dart';
 
@@ -29,7 +29,7 @@ class _TelaCarregamento extends State<TelaCarregamento>
     Timer(Duration(seconds: 5), () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => CadastroPage()),
+        MaterialPageRoute(builder: (context) => TelaCatalogo()),
       );
     });
   }

@@ -1,6 +1,7 @@
+import 'package:PlantIFP2/admin/telaCatalogoAdmin.dart';
 import 'package:flutter/material.dart';
-import 'database/db.dart';
-import 'TelaCatalogo.dart';
+import '../database/db.dart';
+import '../TelaCatalogo.dart';
 
 class CadastroPage extends StatefulWidget {
   @override
@@ -17,6 +18,9 @@ class _CadastroPageState extends State<CadastroPage> {
       appBar: AppBar(
         title: Text('Login'),
         backgroundColor: Color(0xFF459473),
+        automaticallyImplyLeading: false,
+        toolbarHeight: 119,
+        
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
@@ -51,7 +55,7 @@ class _CadastroPageState extends State<CadastroPage> {
                   // Login válido, navegue para a próxima tela
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => TelaCatalogo()),
+                    MaterialPageRoute(builder: (context) => telaCalogoAdmin()),
                   );
                 } else {
                   // Login inválido, exiba uma mensagem de erro
@@ -65,7 +69,7 @@ class _CadastroPageState extends State<CadastroPage> {
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          child: Text('Fechar'),
+                          child: Text('Fechar', style: TextStyle(color: Colors.green),),
                         ),
                       ],
                     ),
@@ -80,7 +84,7 @@ class _CadastroPageState extends State<CadastroPage> {
                   horizontal: 24.0,
                 ),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(10),
                 ),
               ),
             ),

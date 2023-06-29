@@ -1,3 +1,4 @@
+import 'package:PlantIFP2/admin/login_page.dart';
 import 'package:PlantIFP2/scanner.dart';
 import 'package:flutter/material.dart';
 
@@ -198,6 +199,43 @@ class TelaTutorial extends StatelessWidget {
                           textAlign: TextAlign.justify,
                         ),
                       )
+                    ],
+                  ),
+                ),
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: screenWidth - 85,
+                        height: 40,
+                        margin: EdgeInsets.only(top: 20, bottom: 20),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Color(0xFF459473), // Cor de fundo do botão
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CadastroPage(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            'Admin',
+                            style: TextStyle(
+                              color: Colors.white, // Cor do texto
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
