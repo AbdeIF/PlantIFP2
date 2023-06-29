@@ -21,7 +21,7 @@ class TelaTutorial extends StatelessWidget {
 
             child: Container(
               width: screenWidth,
-              height: 0.14 * screenHeight,
+              height: 119,
               decoration: BoxDecoration(
                 color: Color(0xFF459473),
                 borderRadius: BorderRadius.only(
@@ -36,182 +36,171 @@ class TelaTutorial extends StatelessWidget {
                   ),
                 ],
               ),
-              child: Center(
-                child: Text(
-                  'PlantIFP2',
-                  style: TextStyle(
-                    fontSize: 0.055 * screenHeight,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
+            ),
+          ),
+          Positioned(
+            top: 42,
+            left: 33,
+            child: Text(
+              'PlantIFP2',
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
               ),
             ),
           ),
           Positioned(
-            top: 0.16 * screenHeight,
+            // Conteúdo principal
+            top: 119,
             left: 0,
             right: 0,
-            bottom: 0,
+            bottom: 60, // Descontar a altura do botão inferior
+
             child: ListView(
-              padding: EdgeInsets.symmetric(horizontal: 0.04 * screenWidth),
+              padding: const EdgeInsets.all(0),
               children: [
-                SizedBox(height: 0.015 * screenHeight),
-                Text(
-                  'Como Começar?',
-                  style: TextStyle(
-                    fontSize: 0.04 * screenHeight,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF459473),
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.left,
-                ),
-                SizedBox(height: 0.03 * screenHeight),
                 Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  margin: const EdgeInsets.only(
+                    left: 35,
+                    right: 35,
+                    top: 15,
+                    bottom: 0,
                   ),
-                  child: Image.asset(
-                    'images/help.png',
-                    width: 0.8 * screenWidth,
-                    fit: BoxFit.cover,
+                  child: Text(
+                    'Como Começar?',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF459473),
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.left,
                   ),
                 ),
-                SizedBox(height: 0.016 * screenHeight),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: 0.05 * screenWidth,
-                      child: Text(
-                        '1.',
-                        style: TextStyle(
-                          fontSize: 0.04 * screenHeight,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF459473),
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                Container(
+                  child: Container(
+                    margin: const EdgeInsets.only(left: 35, right: 35),
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
-                    SizedBox(width: 0.02 * screenWidth),
-                    Expanded(
-                      child: Text(
-                        'Procure um dos QR Codes espalhados pelo campus ou acesse o catálogo na tela inicial do app.',
-                        style: TextStyle(
-                          fontSize: 0.025 * screenHeight,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.black,
-                        ),
-                        maxLines: 5,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.justify,
-                      ),
+                    child: Image.asset(
+                      'images/help.png',
+                      width: 390,
+                      fit: BoxFit.cover,
                     ),
-                  ],
+                  ),
                 ),
-                SizedBox(height: 0.03 * screenHeight),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: 0.05 * screenWidth,
-                      child: Text(
-                        '2.',
-                        style: TextStyle(
-                          fontSize: 0.04 * screenHeight,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF459473),
+                SizedBox(height: 16),
+                Container(
+                  margin: const EdgeInsets.only(top: 10, left: 35, right: 35),
+                  padding: EdgeInsets.all(1),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.all(5),
+                        width: 25,
+                        child: Text(
+                          '1.',
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF459473),
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
                       ),
-                    ),
-                    SizedBox(width: 0.02 * screenWidth),
-                    Expanded(
-                      child: Text(
-                        'Abra o leitor de QR Code na tela inicial do app e aponte a câmera para o código.',
-                        style: TextStyle(
-                          fontSize: 0.025 * screenHeight,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.black,
+                      Container(
+                        width: screenWidth - 109,
+                        child: Text(
+                          'Procure um dos QR Codes espalhados pelo campus ou acesse o catálogo na tela inicial do app.',
+                          style: const TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.normal,
+                            color: Colors.black,
+                          ),
+                          softWrap: true,
+                          maxLines: 5,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.justify,
                         ),
-                        maxLines: 5,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.justify,
-                      ),
-                    ),
-                  ],
+                      )
+                    ],
+                  ),
                 ),
-                SizedBox(height: 0.03 * screenHeight),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: 0.05 * screenWidth,
-                      child: Text(
-                        '3.',
-                        style: TextStyle(
-                          fontSize: 0.04 * screenHeight,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF459473),
+                Container(
+                  margin: const EdgeInsets.only(top: 20, left: 35, right: 35),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        width: 25,
+                        child: Text(
+                          '2.',
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF459473),
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
                       ),
-                    ),
-                    SizedBox(width: 0.02 * screenWidth),
-                    Expanded(
-                      child: Text(
-                        'Aguarde a identificação do código e aproveite as informações sobre a planta.',
-                        style: TextStyle(
-                          fontSize: 0.025 * screenHeight,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.black,
+                      Container(
+                        width: screenWidth - 109,
+                        child: Text(
+                          'Clique no botão vermelho com ícone de câmera para abrir o leitor e aponte para um QR Code.',
+                          style: const TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.normal,
+                            color: Colors.black,
+                          ),
+                          maxLines: 5,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.justify,
                         ),
-                        maxLines: 5,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.justify,
-                      ),
-                    ),
-                  ],
+                      )
+                    ],
+                  ),
                 ),
-                SizedBox(height: 0.03 * screenHeight),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: 0.05 * screenWidth,
-                      child: Text(
-                        '4.',
-                        style: TextStyle(
-                          fontSize: 0.04 * screenHeight,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF459473),
+                Container(
+                  margin: const EdgeInsets.only(top: 20, left: 35, right: 35),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        width: 25,
+                        child: Text(
+                          '3.',
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF459473),
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
                       ),
-                    ),
-                    SizedBox(width: 0.02 * screenWidth),
-                    Expanded(
-                      child: Text(
-                        'Aproveite a experiência e descubra mais sobre a natureza ao seu redor!',
-                        style: TextStyle(
-                          fontSize: 0.025 * screenHeight,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.black,
+                      Container(
+                        width: screenWidth - 109,
+                        child: Text(
+                          'Pronto :). Agora tire suas dúvidas e faça suas anotações sobre a espécie de planta que encontrou.',
+                          style: const TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.normal,
+                            color: Colors.black,
+                          ),
+                          maxLines: 5,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.justify,
                         ),
-                        maxLines: 5,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.justify,
-                      ),
-                    ),
-                  ],
+                      )
+                    ],
+                  ),
                 ),
-                SizedBox(height: 0.03 * screenHeight),
               ],
             ),
           ),
@@ -278,10 +267,4 @@ class TelaTutorial extends StatelessWidget {
       ),
     );
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: TelaTutorial(),
-  ));
 }
