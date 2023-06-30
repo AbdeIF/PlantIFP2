@@ -11,12 +11,11 @@ class telaCalogoAdmin extends StatefulWidget {
 }
 
 class _telaCalogoAdminState extends State<telaCalogoAdmin> {
-
   List<Map<String, dynamic>> _allData = [];
 
   bool _isLoading = true;
 
-  void _refreshData() async{
+  void _refreshData() async {
     final plants = await DBPlant.getAllData();
     setState(() {
       _allData = plants;
@@ -25,7 +24,7 @@ class _telaCalogoAdminState extends State<telaCalogoAdmin> {
   }
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     _refreshData();
   }
@@ -34,32 +33,110 @@ class _telaCalogoAdminState extends State<telaCalogoAdmin> {
   final TextEditingController _nomepControler = TextEditingController();
   final TextEditingController _nomecControler = TextEditingController();
   final TextEditingController _descricaoControler = TextEditingController();
-  final TextEditingController _periculosidadeControler = TextEditingController();
+  final TextEditingController _periculosidadeControler =
+      TextEditingController();
 
   // Adicionar -------------
-  Future<void> _addData() async{
-    await DBPlant.createData(_imgControler.text, _nomepControler.text, _nomecControler.text, _descricaoControler.text, _periculosidadeControler.text);
+  Future<void> _addData() async {
+    await DBPlant.createData(
+        _imgControler.text,
+        _nomepControler.text,
+        _nomecControler.text,
+        _descricaoControler.text,
+        _periculosidadeControler.text);
     _refreshData();
   }
 
   // Atualizar -------------
-  Future<void> _updateData(int id) async{
-    await DBPlant.updateData(id, _imgControler.text, _nomepControler.text, _nomecControler.text, _descricaoControler.text, _periculosidadeControler.text);
+  Future<void> _updateData(int id) async {
+    await DBPlant.updateData(
+        id,
+        _imgControler.text,
+        _nomepControler.text,
+        _nomecControler.text,
+        _descricaoControler.text,
+        _periculosidadeControler.text);
     _refreshData();
   }
 
   // Deletar -------------
-  void _deleteData(int id) async{
+  void _deleteData(int id) async {
     await DBPlant.deleteData(id);
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      backgroundColor: Colors.green,
-      content: Text("Planta Deletada!")
-    ));
+        backgroundColor: Colors.green, content: Text("Planta Deletada!")));
   }
 
+  void showBottomSheet(int? id) async {
+    if (id != null) {
+      final existingData =
+          _allData.firstWhere((element) => element['id'] == id);
+      _imgControler.text = existingData['img'];
+      _nomepControler.text = existingData['nomeP'];
+      _nomecControler.text = existingData['nomeC'];
+      _descricaoControler.text = existingData['descricao'];
+      _periculosidadeControler.text = existingData['periculosiade'];
+    }
+  }
+
+  void _openAddPlantBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Container(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              TextField(
+                controller: _imgControler,
+                decoration: InputDecoration(
+                  labelText: 'Image',
+                ),
+              ),
+              TextField(
+                controller: _nomepControler,
+                decoration: InputDecoration(
+                  labelText: 'Nome Popular',
+                ),
+              ),
+              TextField(
+                controller: _nomecControler,
+                decoration: InputDecoration(
+                  labelText: 'Nome Científico',
+                ),
+              ),
+              TextField(
+                controller: _descricaoControler,
+                decoration: InputDecoration(
+                  labelText: 'Descrição',
+                ),
+              ),
+              TextField(
+                controller: _periculosidadeControler,
+                decoration: InputDecoration(
+                  labelText: 'Periculosidade',
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  // Adicione aqui a lógica para salvar as informações no banco de dados
+                  _addData();
+                  Navigator.pop(
+                      context); // Fechar o BottomSheet após salvar os dados
+                },
+                child: Text('Salvar'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+// -------------------------------------------------- CORPO DA PÁGINA ----------------------------------------------
   @override
   Widget build(BuildContext context) {
-    debugShowCheckedModeBanner:false;
+    debugShowCheckedModeBanner:
+    false;
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
     final double contentHeight = screenHeight - 78;
@@ -171,14 +248,7 @@ class _telaCalogoAdminState extends State<telaCalogoAdmin> {
                   elevation: 4,
                   shadowColor: Color.fromRGBO(0, 0, 0, 0.25),
                   child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => TelaTutorial(),
-                        ),
-                      );
-                    },
+                    onTap: _openAddPlantBottomSheet,
                     child: Center(
                       child: Text(
                         'Adicionar Plantas',
@@ -220,27 +290,39 @@ class _telaCalogoAdminState extends State<telaCalogoAdmin> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => TelaPlanta(img: 'images/plants/nim.jpg', nomePopular: 'Nim', nomeCientifico: 'nomeCientifico', descricao: 'descricao', periculosidade: 'periculosidade'),
-                                  ),
-                                );
-                              },
-                              child: CardWidget(img: 'images/plants/nim.jpg', nomePopular: 'Nim')
-                            ),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => TelaPlanta(
+                                          img: 'images/plants/nim.jpg',
+                                          nomePopular: 'Nim',
+                                          nomeCientifico: 'nomeCientifico',
+                                          descricao: 'descricao',
+                                          periculosidade: 'periculosidade'),
+                                    ),
+                                  );
+                                },
+                                child: CardWidget(
+                                    img: 'images/plants/nim.jpg',
+                                    nomePopular: 'Nim')),
                             GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => TelaPlanta(img: 'images/plants/cannabis.jpg', nomePopular: 'Maconha', nomeCientifico: 'Cannabis', descricao: 'descricao', periculosidade: 'periculosidade'),
-                                  ),
-                                );
-                              },
-                              child: CardWidget(img: 'images/plants/cannabis.jpg', nomePopular: 'Maconha')
-                            ),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => TelaPlanta(
+                                          img: 'images/plants/cannabis.jpg',
+                                          nomePopular: 'Maconha',
+                                          nomeCientifico: 'Cannabis',
+                                          descricao: 'descricao',
+                                          periculosidade: 'periculosidade'),
+                                    ),
+                                  );
+                                },
+                                child: CardWidget(
+                                    img: 'images/plants/cannabis.jpg',
+                                    nomePopular: 'Maconha')),
                           ],
                         ),
                       ),
@@ -249,8 +331,7 @@ class _telaCalogoAdminState extends State<telaCalogoAdmin> {
                         height: contentHeight * 0.35,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                          ],
+                          children: [],
                         ),
                       ),
                     ],
