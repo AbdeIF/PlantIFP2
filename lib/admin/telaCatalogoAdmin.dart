@@ -1,10 +1,62 @@
 import 'package:PlantIFP2/TelaTutorial.dart';
+import 'package:PlantIFP2/database/db.dart';
 import 'package:PlantIFP2/widgets/card.dart';
 import 'package:flutter/material.dart';
 import '../TelaInfoPlantas.dart';
 import '../scanner.dart';
 
-class telaCalogoAdmin extends StatelessWidget {
+class telaCalogoAdmin extends StatefulWidget {
+  @override
+  State<telaCalogoAdmin> createState() => _telaCalogoAdminState();
+}
+
+class _telaCalogoAdminState extends State<telaCalogoAdmin> {
+
+  List<Map<String, dynamic>> _allData = [];
+
+  bool _isLoading = true;
+
+  void _refreshData() async{
+    final plants = await DBPlant.getAllData();
+    setState(() {
+      _allData = plants;
+      _isLoading = false;
+    });
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    _refreshData();
+  }
+
+  final TextEditingController _imgControler = TextEditingController();
+  final TextEditingController _nomepControler = TextEditingController();
+  final TextEditingController _nomecControler = TextEditingController();
+  final TextEditingController _descricaoControler = TextEditingController();
+  final TextEditingController _periculosidadeControler = TextEditingController();
+
+  // Adicionar -------------
+  Future<void> _addData() async{
+    await DBPlant.createData(_imgControler.text, _nomepControler.text, _nomecControler.text, _descricaoControler.text, _periculosidadeControler.text);
+    _refreshData();
+  }
+
+  // Atualizar -------------
+  Future<void> _updateData(int id) async{
+    await DBPlant.updateData(id, _imgControler.text, _nomepControler.text, _nomecControler.text, _descricaoControler.text, _periculosidadeControler.text);
+    _refreshData();
+  }
+
+  // Deletar -------------
+  void _deleteData(int id) async{
+    await DBPlant.deleteData(id);
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      backgroundColor: Colors.green,
+      content: Text("Planta Deletada!")
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     debugShowCheckedModeBanner:false;

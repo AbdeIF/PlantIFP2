@@ -56,4 +56,74 @@ class DB {
 
     return result.isNotEmpty;
   }
+
+}
+
+
+// ============================================ DB TABLE PLANTS ========================================
+
+
+class DBPlant{
+  static Future<void> createTables(Database database) async{
+    await database.execute("""CREATE TABLE plants(
+      id INTENGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
+      img TEXT,
+      nome_p TEXT,
+      nome_c TEXT,
+      descricao TEXT,
+      periculosidade TEXT 
+    )
+    """);
+  }
+
+  static Future<Database> db() async{
+    return openDatabase(
+      "database_name.db",
+      version: 1,
+      onCreate: (Database database, int version) async{
+        await createTables(database);
+
+      }
+    );
+  }
+
+  static Future<int> createData(String img, String nome_p, String? nome_c, String? descricao, String? periculosidade) async{
+    final db = await DBPlant.db();
+
+    final plants  = {'img': img,'nome_p': nome_p, 'nome_c': nome_c, 'descricao': descricao, 'periculosidade': periculosidade};
+    final id = await db.insert('plants', plants, conflictAlgorithm: ConflictAlgorithm.replace);
+
+    return id;
+  }
+
+  static Future<List<Map<String, dynamic>>> getAllData() async{
+    final db = await DBPlant.db();
+    return db.query('plants', orderBy: 'id');
+  }
+
+  static Future<List<Map<String, dynamic>>> getSingleData(int id) async{
+    final db = await DBPlant.db();
+    return db.query('plants', where: "id= ?", whereArgs: [id], limit: 1);
+  }
+
+  static Future<int> updateData(int id, String img,String nome_p, String? nome_c, String? descricao, String? periculosidade) async{
+    final db = await DBPlant.db();
+    final plants = {
+      'img': img,
+      'nome_p' : nome_p,
+      'nome_c' : nome_c,
+      'descricao' : descricao,
+      'periculosidade' : periculosidade,
+    };
+    final result = await db.update('plants', plants, where: "id = ?", whereArgs: [id]);
+
+    return result;
+  }
+
+  static Future<void> deleteData(int id) async{
+    final db = await DBPlant.db();
+    try{
+      await db.delete('plants', where: "id = ?", whereArgs: [id]);
+    }catch(e){}
+  }
 }
