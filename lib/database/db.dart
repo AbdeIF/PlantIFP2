@@ -63,14 +63,13 @@ class DB {
 class DBPlant {
   static Future<void> createTables(Database database) async {
     await database.execute("""CREATE TABLE plants(
-      id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
+      id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
       img TEXT,
       nome_p TEXT,
       nome_c TEXT,
       descricao TEXT,
       periculosidade TEXT 
-    )
-    """);
+      )""");
   }
 
   static Future<Database> db() async {
