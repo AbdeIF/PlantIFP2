@@ -26,7 +26,7 @@ class DB {
   Future<void> _onCreate(Database db, int version) async {
     await db.execute('''
       CREATE TABLE superuser (
-        id INTEGER PRIMARY KEY AUTO_INCREMENT,
+        id INTEGER PRIMARY KEY,
         email TEXT,
         senha TEXT
       )
@@ -62,21 +62,25 @@ class DB {
 
 class DBPlant {
   static Future<void> createTables(Database database) async {
-    await database.execute("""CREATE TABLE plants(
+    await database.execute('''CREATE TABLE plants(
       id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
       img TEXT,
       nome_p TEXT,
       nome_c TEXT,
       descricao TEXT,
       periculosidade TEXT 
-      )""");
+      )''');
   }
 
   static Future<Database> db() async {
-    return openDatabase("plantifp2.db", version: 1,
-        onCreate: (Database database, int version) async {
-      await createTables(database);
-    });
+    final path = join(await getDatabasesPath(), 'plantifp2.db');
+    return openDatabase(
+      path,
+      version: 1,
+      onCreate: (Database database, int version) async {
+        await createTables(database);
+      },
+    );
   }
 
   static Future<int> createData(String img, String nome_p, String? nome_c,
@@ -103,7 +107,7 @@ class DBPlant {
 
   static Future<List<Map<String, dynamic>>> getSingleData(int id) async {
     final db = await DBPlant.db();
-    return db.query('plants', where: "id= ?", whereArgs: [id], limit: 1);
+    return db.query('plants', where: 'id = ?', whereArgs: [id], limit: 1);
   }
 
   static Future<int> updateData(int id, String img, String nome_p,
@@ -117,7 +121,7 @@ class DBPlant {
       'periculosidade': periculosidade,
     };
     final result =
-        await db.update('plants', plants, where: "id = ?", whereArgs: [id]);
+        await db.update('plants', plants, where: 'id = ?', whereArgs: [id]);
 
     return result;
   }
@@ -125,7 +129,7 @@ class DBPlant {
   static Future<void> deleteData(int id) async {
     final db = await DBPlant.db();
     try {
-      await db.delete('plants', where: "id = ?", whereArgs: [id]);
+      await db.delete('plants', where: 'id = ?', whereArgs: [id]);
     } catch (e) {}
   }
 }

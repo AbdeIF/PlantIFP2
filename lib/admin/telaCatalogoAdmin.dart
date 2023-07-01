@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 import '../TelaInfoPlantas.dart';
 import '../scanner.dart';
 
-class telaCalogoAdmin extends StatefulWidget {
+class TelaCatalogoAdmin extends StatefulWidget {
   @override
-  State<telaCalogoAdmin> createState() => _telaCalogoAdminState();
+  State<TelaCatalogoAdmin> createState() => _TelaCatalogoAdminState();
 }
 
-class _telaCalogoAdminState extends State<telaCalogoAdmin> {
+class _TelaCatalogoAdminState extends State<TelaCatalogoAdmin> {
   List<Map<String, dynamic>> _allData = [];
 
   bool _isLoading = true;
@@ -29,21 +29,21 @@ class _telaCalogoAdminState extends State<telaCalogoAdmin> {
     _refreshData();
   }
 
-  final TextEditingController _imgControler = TextEditingController();
-  final TextEditingController _nomepControler = TextEditingController();
-  final TextEditingController _nomecControler = TextEditingController();
-  final TextEditingController _descricaoControler = TextEditingController();
-  final TextEditingController _periculosidadeControler =
+  final TextEditingController _imgController = TextEditingController();
+  final TextEditingController _nomepController = TextEditingController();
+  final TextEditingController _nomecController = TextEditingController();
+  final TextEditingController _descricaoController = TextEditingController();
+  final TextEditingController _periculosidadeController =
       TextEditingController();
 
   // Adicionar -------------
   Future<void> _addData() async {
     await DBPlant.createData(
-        _imgControler.text,
-        _nomepControler.text,
-        _nomecControler.text,
-        _descricaoControler.text,
-        _periculosidadeControler.text);
+        _imgController.text,
+        _nomepController.text,
+        _nomecController.text,
+        _descricaoController.text,
+        _periculosidadeController.text);
     _refreshData();
   }
 
@@ -51,11 +51,11 @@ class _telaCalogoAdminState extends State<telaCalogoAdmin> {
   Future<void> _updateData(int id) async {
     await DBPlant.updateData(
         id,
-        _imgControler.text,
-        _nomepControler.text,
-        _nomecControler.text,
-        _descricaoControler.text,
-        _periculosidadeControler.text);
+        _imgController.text,
+        _nomepController.text,
+        _nomecController.text,
+        _descricaoController.text,
+        _periculosidadeController.text);
     _refreshData();
   }
 
@@ -70,11 +70,11 @@ class _telaCalogoAdminState extends State<telaCalogoAdmin> {
     if (id != null) {
       final existingData =
           _allData.firstWhere((element) => element['id'] == id);
-      _imgControler.text = existingData['img'];
-      _nomepControler.text = existingData['nomeP'];
-      _nomecControler.text = existingData['nomeC'];
-      _descricaoControler.text = existingData['descricao'];
-      _periculosidadeControler.text = existingData['periculosiade'];
+      _imgController.text = existingData['img'];
+      _nomepController.text = existingData['nomeP'];
+      _nomecController.text = existingData['nomeC'];
+      _descricaoController.text = existingData['descricao'];
+      _periculosidadeController.text = existingData['periculosidade'];
     }
   }
 
@@ -87,31 +87,31 @@ class _telaCalogoAdminState extends State<telaCalogoAdmin> {
           child: Column(
             children: [
               TextField(
-                controller: _imgControler,
+                controller: _imgController,
                 decoration: InputDecoration(
                   labelText: 'Image',
                 ),
               ),
               TextField(
-                controller: _nomepControler,
+                controller: _nomepController,
                 decoration: InputDecoration(
                   labelText: 'Nome Popular',
                 ),
               ),
               TextField(
-                controller: _nomecControler,
+                controller: _nomecController,
                 decoration: InputDecoration(
                   labelText: 'Nome Científico',
                 ),
               ),
               TextField(
-                controller: _descricaoControler,
+                controller: _descricaoController,
                 decoration: InputDecoration(
                   labelText: 'Descrição',
                 ),
               ),
               TextField(
-                controller: _periculosidadeControler,
+                controller: _periculosidadeController,
                 decoration: InputDecoration(
                   labelText: 'Periculosidade',
                 ),
@@ -132,15 +132,9 @@ class _telaCalogoAdminState extends State<telaCalogoAdmin> {
     );
   }
 
-// -------------------------------------------------- CORPO DA PÁGINA ----------------------------------------------
+  // -------------------------------------------------- CORPO DA PÁGINA ----------------------------------------------
   @override
   Widget build(BuildContext context) {
-    debugShowCheckedModeBanner:
-    false;
-    final double screenWidth = MediaQuery.of(context).size.width;
-    final double screenHeight = MediaQuery.of(context).size.height;
-    final double contentHeight = screenHeight - 78;
-
     return Scaffold(
       body: LayoutBuilder(
         builder: (context, constraints) {
