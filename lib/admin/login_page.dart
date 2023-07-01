@@ -56,7 +56,7 @@ class _CadastroPageState extends State<CadastroPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => telaCalogoAdmin()),
+                          builder: (context) => TelaCatalogoAdmin()),
                     );
                   } else {
                     // Login inválido, exiba uma mensagem de erro
