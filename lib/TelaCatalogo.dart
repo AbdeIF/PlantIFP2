@@ -1,10 +1,53 @@
 import 'package:PlantIFP2/TelaTutorial.dart';
 import 'package:PlantIFP2/widgets/card.dart';
 import 'package:flutter/material.dart';
+import 'database/db.dart';
 import 'scanner.dart';
 import 'TelaInfoPlantas.dart';
 
-class TelaCatalogo extends StatelessWidget {
+class TelaCatalogo extends StatefulWidget {
+  @override
+  State<TelaCatalogo> createState() => _TelaCatalogoState();
+}
+
+class _TelaCatalogoState extends State<TelaCatalogo> {
+  List<Map<String, dynamic>> _allData = [];
+
+  bool _isLoading = true;
+
+  void _refreshData() async {
+    final plants = await DBPlant.getAllData();
+    setState(() {
+      _allData = plants;
+      _isLoading = false;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _refreshData();
+  }
+
+  final TextEditingController _imgController = TextEditingController();
+  final TextEditingController _nomepController = TextEditingController();
+  final TextEditingController _nomecController = TextEditingController();
+  final TextEditingController _descricaoController = TextEditingController();
+  final TextEditingController _periculosidadeController =
+      TextEditingController();
+
+  // Atualizar -------------
+  Future<void> _updateData(int id) async {
+    await DBPlant.updateData(
+        id,
+        _imgController.text,
+        _nomepController.text,
+        _nomecController.text,
+        _descricaoController.text,
+        _periculosidadeController.text);
+    _refreshData();
+  }
+
   @override
   Widget build(BuildContext context) {
     debugShowCheckedModeBanner:false;
@@ -147,61 +190,50 @@ class TelaCatalogo extends StatelessWidget {
                 bottom: 55,
                 child: Container(
                   color: Colors.white,
-                  child: ListView(
-                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 2),
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(top: 00, bottom: 10),
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Plantas:',
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF459473),
+                  child: SingleChildScrollView(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minHeight: contentHeight * 0.65,
+                      ),
+                      child: GridView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio:
+                              (screenWidth / 2) / (contentHeight * 0.43),
+                        ),
+                        itemCount: _allData.length,
+                        padding:
+                            EdgeInsets.symmetric(vertical: 15, horizontal: 2),
+                        itemBuilder: (context, index) => GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => TelaPlanta(
+                                  img: _allData[index]['img'],
+                                  nomePopular: _allData[index]['nome_p'],
+                                  nomeCientifico: _allData[index]['nome_c'],
+                                  descricao: _allData[index]['descricao'],
+                                  periculosidade: _allData[index]
+                                      ['periculosidade'],
+                                ),
+                              ),
+                            );
+                          },
+                          child: Card(
+                            child: Container(
+                              height: contentHeight * 0.43,
+                              child: CardWidget(
+                                img: _allData[index]['img'],
+                                nomePopular: _allData[index]['nome_p'],
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                      Container(
-                        height: contentHeight * 0.35,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => TelaPlanta(img: 'images/plants/nim.jpg', nomePopular: 'Nim', nomeCientifico: 'nomeCientifico', descricao: 'descricao', periculosidade: 'periculosidade'),
-                                  ),
-                                );
-                              },
-                              child: CardWidget(img: 'images/plants/nim.jpg', nomePopular: 'Nim')
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => TelaPlanta(img: 'images/plants/cannabis.jpg', nomePopular: 'Maconha', nomeCientifico: 'Cannabis', descricao: 'descricao', periculosidade: 'periculosidade'),
-                                  ),
-                                );
-                              },
-                              child: CardWidget(img: 'images/plants/cannabis.jpg', nomePopular: 'Maconha')
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      Container(
-                        height: contentHeight * 0.35,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                          ],
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),

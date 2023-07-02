@@ -1,9 +1,8 @@
-import 'package:PlantIFP2/TelaTutorial.dart';
 import 'package:PlantIFP2/database/db.dart';
-import 'package:PlantIFP2/widgets/card.dart';
 import 'package:flutter/material.dart';
 import '../TelaInfoPlantas.dart';
 import '../scanner.dart';
+import 'card-adm.dart';
 
 class TelaCatalogoAdmin extends StatefulWidget {
   @override
@@ -263,72 +262,50 @@ class _TelaCatalogoAdminState extends State<TelaCatalogoAdmin> {
                 bottom: 55,
                 child: Container(
                   color: Colors.white,
-                  child: ListView(
-                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 2),
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(top: 00, bottom: 10),
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Plantas:',
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF459473),
+                  child: SingleChildScrollView(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minHeight: contentHeight * 0.65,
+                      ),
+                      child: GridView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio:
+                              (screenWidth / 2) / (contentHeight * 0.43),
+                        ),
+                        itemCount: _allData.length,
+                        padding:
+                            EdgeInsets.symmetric(vertical: 15, horizontal: 2),
+                        itemBuilder: (context, index) => GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => TelaPlanta(
+                                  img: _allData[index]['img'],
+                                  nomePopular: _allData[index]['nome_p'],
+                                  nomeCientifico: _allData[index]['nome_c'],
+                                  descricao: _allData[index]['descricao'],
+                                  periculosidade: _allData[index]
+                                      ['periculosidade'],
+                                ),
+                              ),
+                            );
+                          },
+                          child: Card(
+                            child: Container(
+                              height: contentHeight * 0.43,
+                              child: CardWidgetADM(
+                                img: _allData[index]['img'],
+                                nomePopular: _allData[index]['nome_p'],
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                      Container(
-                        height: contentHeight * 0.35,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => TelaPlanta(
-                                          img: 'images/plants/nim.jpg',
-                                          nomePopular: 'Nim',
-                                          nomeCientifico: 'nomeCientifico',
-                                          descricao: 'descricao',
-                                          periculosidade: 'periculosidade'),
-                                    ),
-                                  );
-                                },
-                                child: CardWidget(
-                                    img: 'images/plants/nim.jpg',
-                                    nomePopular: 'Nim')),
-                            GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => TelaPlanta(
-                                          img: 'images/plants/cannabis.jpg',
-                                          nomePopular: 'Maconha',
-                                          nomeCientifico: 'Cannabis',
-                                          descricao: 'descricao',
-                                          periculosidade: 'periculosidade'),
-                                    ),
-                                  );
-                                },
-                                child: CardWidget(
-                                    img: 'images/plants/cannabis.jpg',
-                                    nomePopular: 'Maconha')),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      Container(
-                        height: contentHeight * 0.35,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [],
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),
