@@ -117,8 +117,7 @@ class DBPlant {
       'descricao': descricao,
       'periculosidade': periculosidade,
     };
-    final result =
-        await db.update('plants', plants, where: 'id = ?', whereArgs: [id]);
+    final result = await db.update('plants', plants, where: 'id = ?', whereArgs: [id]);
 
     return result;
   }

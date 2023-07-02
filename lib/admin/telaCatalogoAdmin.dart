@@ -75,9 +75,7 @@ class _TelaCatalogoAdminState extends State<TelaCatalogoAdmin> {
       _descricaoController.text = existingData['descricao'];
       _periculosidadeController.text = existingData['periculosidade'];
     }
-  }
 
-  void _openAddPlantBottomSheet() {
     showModalBottomSheet(
       context: context,
       builder: (context) {
@@ -116,13 +114,24 @@ class _TelaCatalogoAdminState extends State<TelaCatalogoAdmin> {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {
-                  // Adicione aqui a lógica para salvar as informações no banco de dados
-                  _addData();
-                  Navigator.pop(
-                      context); // Fechar o BottomSheet após salvar os dados
+                onPressed: () async {
+                  if (id == null) {
+                    await _addData();
+                  }
+
+                  if (id != null) {
+                    await _updateData(id);
+                  }
+
+                  _imgController.text = "";
+                  _nomepController.text = "";
+                  _nomecController.text = "";
+                  _descricaoController.text = "";
+                  _periculosidadeController.text = "";
+
+                  Navigator.pop(context); // Fechar o BottomSheet após salvar os dados
                 },
-                child: Text('Salvar'),
+                child: Text(id == null ? 'Salvar' : 'Atualizar'),
               ),
             ],
           ),
@@ -241,7 +250,7 @@ class _TelaCatalogoAdminState extends State<TelaCatalogoAdmin> {
                   elevation: 4,
                   shadowColor: Color.fromRGBO(0, 0, 0, 0.25),
                   child: InkWell(
-                    onTap: _openAddPlantBottomSheet,
+                    onTap: () => showBottomSheet(null),
                     child: Center(
                       child: Text(
                         'Adicionar Plantas',
@@ -267,44 +276,50 @@ class _TelaCatalogoAdminState extends State<TelaCatalogoAdmin> {
                       constraints: BoxConstraints(
                         minHeight: contentHeight * 0.65,
                       ),
-                      child: GridView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          childAspectRatio:
-                              (screenWidth / 2) / (contentHeight * 0.43),
-                        ),
-                        itemCount: _allData.length,
-                        padding:
-                            EdgeInsets.symmetric(vertical: 15, horizontal: 2),
-                        itemBuilder: (context, index) => GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => TelaPlanta(
-                                  img: _allData[index]['img'],
-                                  nomePopular: _allData[index]['nome_p'],
-                                  nomeCientifico: _allData[index]['nome_c'],
-                                  descricao: _allData[index]['descricao'],
-                                  periculosidade: _allData[index]
-                                      ['periculosidade'],
+                      child: _isLoading
+                          ? Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : GridView.builder(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                childAspectRatio:
+                                    (screenWidth / 2) / (contentHeight * 0.43),
+                              ),
+                              itemCount: _allData.length,
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 15, horizontal: 2),
+                              itemBuilder: (context, index) => GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => TelaPlanta(
+                                        img: _allData[index]['img'],
+                                        nomePopular: _allData[index]['nome_p'],
+                                        nomeCientifico: _allData[index]['nome_c'],
+                                        descricao: _allData[index]['descricao'],
+                                        periculosidade: _allData[index]
+                                            ['periculosidade'],
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Card(
+                                  child: Container(
+                                    height: contentHeight * 0.43,
+                                    child: CardWidgetADM(
+                                      img: _allData[index]['img'],
+                                      nomePopular: _allData[index]['nome_p'],
+                                      id: _allData[index]['id'],
+                                    ),
+                                  ),
                                 ),
                               ),
-                            );
-                          },
-                          child: Card(
-                            child: Container(
-                              height: contentHeight * 0.43,
-                              child: CardWidgetADM(
-                                img: _allData[index]['img'],
-                                nomePopular: _allData[index]['nome_p'],
-                              ),
                             ),
-                          ),
-                        ),
-                      ),
                     ),
                   ),
                 ),
