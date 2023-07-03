@@ -1,6 +1,5 @@
 import 'package:PlantIFP2/database/db.dart';
 import 'package:flutter/material.dart';
-import 'documentos_page.dart';
 import '../TelaInfoPlantas.dart';
 import '../scanner.dart';
 import 'card-adm.dart';
@@ -80,69 +79,61 @@ class _TelaCatalogoAdminState extends State<TelaCatalogoAdmin> {
     showModalBottomSheet(
       context: context,
       builder: (context) {
-        return IntrinsicHeight(
-          child: SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  IconButton(
-                      onPressed: () => DocumentosPage(),
-                      icon: Icon(Icons.image)),
-                  // TextField(
-                  //   controller: _imgController,
-                  //   decoration: InputDecoration(
-                  //     labelText: 'Image',
-                  //   ),
-                  // ),
-                  TextField(
-                    controller: _nomepController,
-                    decoration: InputDecoration(
-                      labelText: 'Nome Popular',
-                    ),
-                  ),
-                  TextField(
-                    controller: _nomecController,
-                    decoration: InputDecoration(
-                      labelText: 'Nome Científico',
-                    ),
-                  ),
-                  TextField(
-                    controller: _descricaoController,
-                    decoration: InputDecoration(
-                      labelText: 'Descrição',
-                    ),
-                  ),
-                  TextField(
-                    controller: _periculosidadeController,
-                    decoration: InputDecoration(
-                      labelText: 'Periculosidade',
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      if (id == null) {
-                        await _addData();
-                      }
-
-                      if (id != null) {
-                        await _updateData(id);
-                      }
-
-                      _imgController.text = "";
-                      _nomepController.text = "";
-                      _nomecController.text = "";
-                      _descricaoController.text = "";
-                      _periculosidadeController.text = "";
-
-                      Navigator.pop(
-                          context); // Fechar o BottomSheet após salvar os dados
-                    },
-                    child: Text(id == null ? 'Salvar' : 'Atualizar'),
-                  ),
-                ],
+        return Container(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              TextField(
+                controller: _imgController,
+                decoration: InputDecoration(
+                  labelText: 'Image',
+                ),
               ),
-            ),
+              TextField(
+                controller: _nomepController,
+                decoration: InputDecoration(
+                  labelText: 'Nome Popular',
+                ),
+              ),
+              TextField(
+                controller: _nomecController,
+                decoration: InputDecoration(
+                  labelText: 'Nome Científico',
+                ),
+              ),
+              TextField(
+                controller: _descricaoController,
+                decoration: InputDecoration(
+                  labelText: 'Descrição',
+                ),
+              ),
+              TextField(
+                controller: _periculosidadeController,
+                decoration: InputDecoration(
+                  labelText: 'Periculosidade',
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  if (id == null) {
+                    await _addData();
+                  }
+
+                  if (id != null) {
+                    await _updateData(id);
+                  }
+
+                  _imgController.text = "";
+                  _nomepController.text = "";
+                  _nomecController.text = "";
+                  _descricaoController.text = "";
+                  _periculosidadeController.text = "";
+
+                  Navigator.pop(context); // Fechar o BottomSheet após salvar os dados
+                },
+                child: Text(id == null ? 'Salvar' : 'Atualizar'),
+              ),
+            ],
           ),
         );
       },
@@ -309,8 +300,7 @@ class _TelaCatalogoAdminState extends State<TelaCatalogoAdmin> {
                                       builder: (context) => TelaPlanta(
                                         img: _allData[index]['img'],
                                         nomePopular: _allData[index]['nome_p'],
-                                        nomeCientifico: _allData[index]
-                                            ['nome_c'],
+                                        nomeCientifico: _allData[index]['nome_c'],
                                         descricao: _allData[index]['descricao'],
                                         periculosidade: _allData[index]
                                             ['periculosidade'],
