@@ -6,6 +6,7 @@
 - Design: [Projeto Figma](https://www.figma.com/file/ZaZovOXTb3cpO4rCx2neiO/PlantIFP2-Prototype?type=design&node-id=0%3A1&mode=design&t=XfxrYnf1SO7zX2aa-1)
 - Flutter;
 - Dart;
+- SQLite;
 
 ## 🤝 Como contribuir?
 
@@ -39,6 +40,14 @@
         <img src="https://avatars.githubusercontent.com/u/125039158?v=4" width="100px;" alt="Foto do Bruno Lima no GitHub"/><br>
         <sub>
           <b>Bruno Lima</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/OMaskara310">
+        <img src="https://avatars.githubusercontent.com/u/107417702?v=4" width="100px;" alt="Foto do João no GitHub"/><br>
+        <sub>
+          <b>João Carlos</b>
         </sub>
       </a>
     </td>
