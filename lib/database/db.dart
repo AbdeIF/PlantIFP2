@@ -71,6 +71,7 @@ class DBPlant {
       periculosidade TEXT 
       )''');
   }
+  
 
   static Future<sql.Database> db() async{
     return sql.openDatabase("database_name.db", version: 1,
