@@ -1,29 +1,29 @@
-import 'package:sqflite/sqflite.dart';
+import 'package:sqflite/sqflite.dart' as sql;
 import 'package:path/path.dart';
 
 class DB {
   DB._();
   static final DB instance = DB._();
-  static Database? _database;
+  static sql.Database? _database;
 
-  Future<Database> get database async {
+  Future<sql.Database> get database async {
     if (_database != null) return _database!;
 
     _database = await _initDatabase();
     return _database!;
   }
 
-  Future<Database> _initDatabase() async {
-    final path = join(await getDatabasesPath(), 'plantifp2.db');
+  Future<sql.Database> _initDatabase() async {
+    final path = join(await sql.getDatabasesPath(), 'plantifp2.db');
 
-    return await openDatabase(
+    return await sql.openDatabase(
       path,
       version: 1,
       onCreate: _onCreate,
     );
   }
 
-  Future<void> _onCreate(Database db, int version) async {
+  Future<void> _onCreate(sql.Database db, int version) async {
     await db.execute('''
       CREATE TABLE superuser (
         id INTEGER PRIMARY KEY,
@@ -35,14 +35,14 @@ class DB {
     await _inicializarSuperUsuario(db); // Inicializar super usuário
   }
 
-  Future<void> _inicializarSuperUsuario(Database db) async {
+  Future<void> _inicializarSuperUsuario(sql.Database db) async {
     final email = 'superuser@gmail.com';
     final senha = '123456';
 
     await db.insert(
       'superuser',
       {'email': email, 'senha': senha},
-      conflictAlgorithm: ConflictAlgorithm.ignore,
+      conflictAlgorithm: sql.ConflictAlgorithm.ignore,
     );
   }
 
@@ -61,7 +61,7 @@ class DB {
 // ============================================ DB TABLE PLANTS ========================================
 
 class DBPlant {
-  static Future<void> createTables(Database database) async {
+  static Future<void> createTables(sql.Database database) async {
     await database.execute('''CREATE TABLE plants(
       id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
       img TEXT,
@@ -72,14 +72,11 @@ class DBPlant {
       )''');
   }
 
-  static Future<Database> db() async {
-    final path = join(await getDatabasesPath(), 'plantifp2.db');
-    return openDatabase(
-      path,
-      version: 1,
-      onCreate: (Database database, int version) async {
+  static Future<sql.Database> db() async{
+    return sql.openDatabase("database_name.db", version: 1,
+      onCreate: (sql.Database database, int version) async{
         await createTables(database);
-      },
+      }
     );
   }
 
@@ -95,7 +92,7 @@ class DBPlant {
       'periculosidade': periculosidade
     };
     final id = await db.insert('plants', plants,
-        conflictAlgorithm: ConflictAlgorithm.replace);
+        conflictAlgorithm: sql.ConflictAlgorithm.replace);
 
     return id;
   }
@@ -120,8 +117,7 @@ class DBPlant {
       'descricao': descricao,
       'periculosidade': periculosidade,
     };
-    final result =
-        await db.update('plants', plants, where: 'id = ?', whereArgs: [id]);
+    final result = await db.update('plants', plants, where: 'id = ?', whereArgs: [id]);
 
     return result;
   }

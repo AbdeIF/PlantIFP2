@@ -1,9 +1,8 @@
-import 'package:PlantIFP2/TelaTutorial.dart';
 import 'package:PlantIFP2/database/db.dart';
-import 'package:PlantIFP2/widgets/card.dart';
 import 'package:flutter/material.dart';
 import '../TelaInfoPlantas.dart';
 import '../scanner.dart';
+import 'card-adm.dart';
 
 class TelaCatalogoAdmin extends StatefulWidget {
   @override
@@ -76,9 +75,7 @@ class _TelaCatalogoAdminState extends State<TelaCatalogoAdmin> {
       _descricaoController.text = existingData['descricao'];
       _periculosidadeController.text = existingData['periculosidade'];
     }
-  }
 
-  void _openAddPlantBottomSheet() {
     showModalBottomSheet(
       context: context,
       builder: (context) {
@@ -117,13 +114,24 @@ class _TelaCatalogoAdminState extends State<TelaCatalogoAdmin> {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {
-                  // Adicione aqui a lógica para salvar as informações no banco de dados
-                  _addData();
-                  Navigator.pop(
-                      context); // Fechar o BottomSheet após salvar os dados
+                onPressed: () async {
+                  if (id == null) {
+                    await _addData();
+                  }
+
+                  if (id != null) {
+                    await _updateData(id);
+                  }
+
+                  _imgController.text = "";
+                  _nomepController.text = "";
+                  _nomecController.text = "";
+                  _descricaoController.text = "";
+                  _periculosidadeController.text = "";
+
+                  Navigator.pop(context); // Fechar o BottomSheet após salvar os dados
                 },
-                child: Text('Salvar'),
+                child: Text(id == null ? 'Salvar' : 'Atualizar'),
               ),
             ],
           ),
@@ -242,7 +250,7 @@ class _TelaCatalogoAdminState extends State<TelaCatalogoAdmin> {
                   elevation: 4,
                   shadowColor: Color.fromRGBO(0, 0, 0, 0.25),
                   child: InkWell(
-                    onTap: _openAddPlantBottomSheet,
+                    onTap: () => showBottomSheet(null),
                     child: Center(
                       child: Text(
                         'Adicionar Plantas',
@@ -263,72 +271,56 @@ class _TelaCatalogoAdminState extends State<TelaCatalogoAdmin> {
                 bottom: 55,
                 child: Container(
                   color: Colors.white,
-                  child: ListView(
-                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 2),
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(top: 00, bottom: 10),
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Plantas:',
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF459473),
-                          ),
-                        ),
+                  child: SingleChildScrollView(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minHeight: contentHeight * 0.65,
                       ),
-                      Container(
-                        height: contentHeight * 0.35,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            GestureDetector(
+                      child: _isLoading
+                          ? Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : GridView.builder(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                childAspectRatio:
+                                    (screenWidth / 2) / (contentHeight * 0.43),
+                              ),
+                              itemCount: _allData.length,
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 15, horizontal: 2),
+                              itemBuilder: (context, index) => GestureDetector(
                                 onTap: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => TelaPlanta(
-                                          img: 'images/plants/nim.jpg',
-                                          nomePopular: 'Nim',
-                                          nomeCientifico: 'nomeCientifico',
-                                          descricao: 'descricao',
-                                          periculosidade: 'periculosidade'),
+                                        img: _allData[index]['img'],
+                                        nomePopular: _allData[index]['nome_p'],
+                                        nomeCientifico: _allData[index]['nome_c'],
+                                        descricao: _allData[index]['descricao'],
+                                        periculosidade: _allData[index]
+                                            ['periculosidade'],
+                                      ),
                                     ),
                                   );
                                 },
-                                child: CardWidget(
-                                    img: 'images/plants/nim.jpg',
-                                    nomePopular: 'Nim')),
-                            GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => TelaPlanta(
-                                          img: 'images/plants/cannabis.jpg',
-                                          nomePopular: 'Maconha',
-                                          nomeCientifico: 'Cannabis',
-                                          descricao: 'descricao',
-                                          periculosidade: 'periculosidade'),
+                                child: Card(
+                                  child: Container(
+                                    height: contentHeight * 0.43,
+                                    child: CardWidgetADM(
+                                      img: _allData[index]['img'],
+                                      nomePopular: _allData[index]['nome_p'],
+                                      id: _allData[index]['id'],
                                     ),
-                                  );
-                                },
-                                child: CardWidget(
-                                    img: 'images/plants/cannabis.jpg',
-                                    nomePopular: 'Maconha')),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      Container(
-                        height: contentHeight * 0.35,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [],
-                        ),
-                      ),
-                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                    ),
                   ),
                 ),
               ),
