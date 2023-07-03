@@ -21,79 +21,91 @@ class _CadastroPageState extends State<CadastroPage> {
         automaticallyImplyLeading: false,
         toolbarHeight: 119,
       ),
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextField(
-                controller: emailController,
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  border: OutlineInputBorder(),
+      body: SingleChildScrollView(
+        child: GestureDetector(
+          onTap: () {
+            // Esconder o teclado ao tocar fora dos campos de texto
+            FocusScope.of(context).unfocus();
+          },
+          child: Container(
+            padding: EdgeInsets.all(16.0),
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image(
+                  image: AssetImage('../images/logo.png'),
                 ),
-              ),
-              SizedBox(height: 16.0),
-              TextField(
-                controller: senhaController,
-                decoration: InputDecoration(
-                  labelText: 'Senha',
-                  border: OutlineInputBorder(),
+                SizedBox(height: 16.0),
+                TextField(
+                  controller: emailController,
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    border: OutlineInputBorder(),
+                  ),
                 ),
-                obscureText: true,
-              ),
-              SizedBox(height: 16.0),
-              ElevatedButton(
-                onPressed: () async {
-                  String email = emailController.text;
-                  String senha = senhaController.text;
+                SizedBox(height: 16.0),
+                TextField(
+                  controller: senhaController,
+                  decoration: InputDecoration(
+                    labelText: 'Senha',
+                    border: OutlineInputBorder(),
+                  ),
+                  obscureText: true,
+                ),
+                SizedBox(height: 16.0),
+                ElevatedButton(
+                  onPressed: () async {
+                    String email = emailController.text;
+                    String senha = senhaController.text;
 
-                  bool loginValido = await validarLogin(email, senha);
+                    bool loginValido = await validarLogin(email, senha);
 
-                  if (loginValido) {
-                    // Login válido, navegue para a próxima tela
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => TelaCatalogoAdmin()),
-                    );
-                  } else {
-                    // Login inválido, exiba uma mensagem de erro
-                    showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        title: Text('Erro de login'),
-                        content:
-                            Text('Credenciais inválidas. Tente novamente.'),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Text(
-                              'Fechar',
-                              style: TextStyle(color: Colors.green),
+                    if (loginValido) {
+                      // Login válido, navegue para a próxima tela
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TelaCatalogoAdmin(),
+                        ),
+                      );
+                    } else {
+                      // Login inválido, exiba uma mensagem de erro
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text('Erro de login'),
+                          content:
+                              Text('Credenciais inválidas. Tente novamente.'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                'Fechar',
+                                style: TextStyle(color: Colors.green),
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    );
-                  }
-                },
-                child: Text('Login'),
-                style: ElevatedButton.styleFrom(
-                  primary: Color(0xFF459473),
-                  padding: EdgeInsets.symmetric(
-                    vertical: 12.0,
-                    horizontal: 24.0,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+                          ],
+                        ),
+                      );
+                    }
+                  },
+                  child: Text('Login'),
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0xFF459473),
+                    padding: EdgeInsets.symmetric(
+                      vertical: 12.0,
+                      horizontal: 24.0,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
