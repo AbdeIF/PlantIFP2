@@ -1,5 +1,6 @@
 import 'package:PlantIFP2/database/db.dart';
 import 'package:flutter/material.dart';
+import 'documentos_page.dart';
 import '../TelaInfoPlantas.dart';
 import '../scanner.dart';
 import 'card-adm.dart';
@@ -85,12 +86,15 @@ class _TelaCatalogoAdminState extends State<TelaCatalogoAdmin> {
               padding: EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  TextField(
-                    controller: _imgController,
-                    decoration: InputDecoration(
-                      labelText: 'Image',
-                    ),
-                  ),
+                  IconButton(
+                      onPressed: () => DocumentosPage(),
+                      icon: Icon(Icons.image)),
+                  // TextField(
+                  //   controller: _imgController,
+                  //   decoration: InputDecoration(
+                  //     labelText: 'Image',
+                  //   ),
+                  // ),
                   TextField(
                     controller: _nomepController,
                     decoration: InputDecoration(
