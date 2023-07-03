@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:PlantIFP2/widgets/info.dart';
 
+import 'database/db.dart';
+
 class QRCodePage extends StatefulWidget {
   const QRCodePage({Key? key}) : super(key: key);
 
@@ -10,14 +12,17 @@ class QRCodePage extends StatefulWidget {
 }
 
 class _QRCodePageState extends State<QRCodePage> {
-  
   String ticket = '';
   List<String> tickets = [];
+  List<Map<String, dynamic>> _allData = [];
+  bool _isLoading = true;
+  bool _isTicketValidated = false;
 
   @override
   void initState() {
     super.initState();
     readQRCode();
+    _refreshData();
   }
 
   void readQRCode() async {
@@ -27,7 +32,26 @@ class _QRCodePageState extends State<QRCodePage> {
       false,
       ScanMode.QR,
     );
+
+    bool isValidated = await validateTicket(code);
+
     setState(() => ticket = code != '-1' ? code : 'Não validado');
+    _isTicketValidated = isValidated; // Adicione esta linha
+  }
+
+  Future<bool> validateTicket(String ticket) async {
+    final plants = await DBPlant.getAllData();
+    List<String> plantNames =
+        plants.map((plant) => plant['nome_p'] as String).toList();
+    return plantNames.contains(ticket);
+  }
+
+  void _refreshData() async {
+    final plants = await DBPlant.getAllData();
+    setState(() {
+      _allData = plants;
+      _isLoading = false;
+    });
   }
 
   @override
@@ -61,7 +85,7 @@ class _QRCodePageState extends State<QRCodePage> {
               ],
             ),
             child: Container(
-              margin: EdgeInsets.only(top: 42 , left: 33),
+              margin: EdgeInsets.only(top: 42, left: 33),
               child: Text(
                 'PlantIFP2',
                 style: const TextStyle(
@@ -90,23 +114,18 @@ class _QRCodePageState extends State<QRCodePage> {
                       ),
                     ),
                   ),
-                }else if (ticket == "Cannabis") ...{
+                } else if (_isTicketValidated) ...{
                   InfoWidget(
-                    img: 'images/plants/cannabis.jpg',
-                    nomePopular: 'Maconha',
-                    nomeCientifico: 'Cannabis sativa',
-                    descricao: 'descricao',
-                    periculosidade: 'Baixa.',
+                    img: 'images/plants/$ticket.jpg',
+                    nomePopular: ticket,
+                    nomeCientifico: _allData.firstWhere(
+                        (plant) => plant['nome_p'] == ticket)['nome_c'],
+                    descricao: _allData.firstWhere(
+                        (plant) => plant['nome_p'] == ticket)['descricao'],
+                    periculosidade: _allData.firstWhere(
+                        (plant) => plant['nome_p'] == ticket)['periculosidade'],
                   ),
-                }else if (ticket == "Nim") ...{
-                  InfoWidget(
-                    img: 'images/plants/nim.jpg',
-                    nomePopular: 'Nim',
-                    nomeCientifico: 'Azadirachta indica A. Jus',
-                    descricao: 'árvore da família Meliaceae, com distribuição natural no sul da Ásia e utilizada na produção de madeira e para fins medicinais.',
-                    periculosidade: 'Baixa.',
-                  ),
-                }else ...{
+                } else ...{
                   Container(
                     alignment: Alignment.center,
                     padding: EdgeInsets.only(top: 40),
