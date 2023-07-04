@@ -71,8 +71,8 @@ flutter:
    - images/help.png
 
    
-   - images/plants/Cannabis.jpg
-   - images/plants/Nim.jpg
+   - images/plants/cannabis.jpg
+   - images/plants/nim.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

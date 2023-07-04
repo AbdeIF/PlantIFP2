@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:PlantIFP2/database/db.dart';
 import 'package:flutter/material.dart';
-import 'documentos_page.dart';
 import '../TelaInfoPlantas.dart';
 import '../scanner.dart';
 import 'card-adm.dart';
@@ -110,12 +109,6 @@ class _TelaCatalogoAdminState extends State<TelaCatalogoAdmin> {
                         : null,
                   ),
                   Divider(),
-                  // TextField(
-                  //   controller: _imgController,
-                  //   decoration: InputDecoration(
-                  //     labelText: 'Image',
-                  //   ),
-                  // ),
                   TextField(
                     controller: _nomepController,
                     decoration: InputDecoration(
@@ -144,9 +137,7 @@ class _TelaCatalogoAdminState extends State<TelaCatalogoAdmin> {
                     onPressed: () async {
                       if (id == null) {
                         await _addData();
-                      }
-
-                      if (id != null) {
+                      } else {
                         await _updateData(id);
                       }
 
