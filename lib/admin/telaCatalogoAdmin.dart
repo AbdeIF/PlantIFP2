@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:PlantIFP2/database/db.dart';
 import 'package:flutter/material.dart';
 import 'documentos_page.dart';
 import '../TelaInfoPlantas.dart';
 import '../scanner.dart';
 import 'card-adm.dart';
+import 'package:image_picker/image_picker.dart';
 
 class TelaCatalogoAdmin extends StatefulWidget {
   @override
@@ -12,6 +15,8 @@ class TelaCatalogoAdmin extends StatefulWidget {
 
 class _TelaCatalogoAdminState extends State<TelaCatalogoAdmin> {
   List<Map<String, dynamic>> _allData = [];
+  XFile? comprovante;
+  XFile? comprovante2;
 
   bool _isLoading = true;
 
@@ -86,9 +91,25 @@ class _TelaCatalogoAdminState extends State<TelaCatalogoAdmin> {
               padding: EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  IconButton(
-                      onPressed: () => DocumentosPage(),
-                      icon: Icon(Icons.image)),
+                  Divider(),
+                  ListTile(
+                    leading: Icon(Icons.camera),
+                    title: Text('Tirar foto'),
+                    onTap: tirarFoto,
+                    trailing: comprovante2 != null
+                        ? Image.file(File(comprovante2!.path))
+                        : null,
+                  ),
+                  Divider(),
+                  ListTile(
+                    leading: Icon(Icons.camera),
+                    title: Text('Selecionar foto'),
+                    onTap: selecionarFoto,
+                    trailing: comprovante != null
+                        ? Image.file(File(comprovante!.path))
+                        : null,
+                  ),
+                  Divider(),
                   // TextField(
                   //   controller: _imgController,
                   //   decoration: InputDecoration(
@@ -147,6 +168,28 @@ class _TelaCatalogoAdminState extends State<TelaCatalogoAdmin> {
         );
       },
     );
+  }
+
+  selecionarFoto() async {
+    final ImagePicker picker = ImagePicker();
+
+    try {
+      XFile? file = await picker.pickImage(source: ImageSource.gallery);
+      if (file != null) setState(() => comprovante = file);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  tirarFoto() async {
+    final ImagePicker picker = ImagePicker();
+
+    try {
+      XFile? file = await picker.pickImage(source: ImageSource.camera);
+      if (file != null) setState(() => comprovante2 = file);
+    } catch (e) {
+      print(e);
+    }
   }
 
   // -------------------------------------------------- CORPO DA PÁGINA ----------------------------------------------
