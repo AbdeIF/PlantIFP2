@@ -1,5 +1,5 @@
-import 'package:PlantIFP2/admin/telaCatalogoAdmin.dart';
 import 'package:flutter/material.dart';
+import 'package:PlantIFP2/admin/telaCatalogoAdmin.dart';
 import '../database/db.dart';
 import '../TelaCatalogo.dart';
 
@@ -12,6 +12,11 @@ class _CadastroPageState extends State<CadastroPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController senhaController = TextEditingController();
 
+  Future<bool> validarLogin(String email, String senha) async {
+    final db = DB.instance;
+    return await db.validarLogin(email, senha);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +26,7 @@ class _CadastroPageState extends State<CadastroPage> {
         automaticallyImplyLeading: false,
         toolbarHeight: 119,
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(16.0),
           child: Column(
@@ -56,7 +61,8 @@ class _CadastroPageState extends State<CadastroPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => TelaCatalogoAdmin()),
+                        builder: (context) => TelaCatalogoAdmin(),
+                      ),
                     );
                   } else {
                     // Login inválido, exiba uma mensagem de erro
@@ -98,10 +104,5 @@ class _CadastroPageState extends State<CadastroPage> {
         ),
       ),
     );
-  }
-
-  Future<bool> validarLogin(String email, String senha) async {
-    final db = DB.instance;
-    return await db.validarLogin(email, senha);
   }
 }

@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:PlantIFP2/database/db.dart';
 import 'package:flutter/material.dart';
 import '../TelaInfoPlantas.dart';
 import '../scanner.dart';
 import 'card-adm.dart';
+import 'package:image_picker/image_picker.dart';
 
 class TelaCatalogoAdmin extends StatefulWidget {
   @override
@@ -11,6 +14,8 @@ class TelaCatalogoAdmin extends StatefulWidget {
 
 class _TelaCatalogoAdminState extends State<TelaCatalogoAdmin> {
   List<Map<String, dynamic>> _allData = [];
+  XFile? comprovante;
+  XFile? comprovante2;
 
   bool _isLoading = true;
 
@@ -79,65 +84,103 @@ class _TelaCatalogoAdminState extends State<TelaCatalogoAdmin> {
     showModalBottomSheet(
       context: context,
       builder: (context) {
-        return Container(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              TextField(
-                controller: _imgController,
-                decoration: InputDecoration(
-                  labelText: 'Image',
-                ),
-              ),
-              TextField(
-                controller: _nomepController,
-                decoration: InputDecoration(
-                  labelText: 'Nome Popular',
-                ),
-              ),
-              TextField(
-                controller: _nomecController,
-                decoration: InputDecoration(
-                  labelText: 'Nome Científico',
-                ),
-              ),
-              TextField(
-                controller: _descricaoController,
-                decoration: InputDecoration(
-                  labelText: 'Descrição',
-                ),
-              ),
-              TextField(
-                controller: _periculosidadeController,
-                decoration: InputDecoration(
-                  labelText: 'Periculosidade',
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  if (id == null) {
-                    await _addData();
-                  }
+        return IntrinsicHeight(
+          child: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  Divider(),
+                  ListTile(
+                    leading: Icon(Icons.camera),
+                    title: Text('Tirar foto'),
+                    onTap: tirarFoto,
+                    trailing: comprovante2 != null
+                        ? Image.file(File(comprovante2!.path))
+                        : null,
+                  ),
+                  Divider(),
+                  ListTile(
+                    leading: Icon(Icons.camera),
+                    title: Text('Selecionar foto'),
+                    onTap: selecionarFoto,
+                    trailing: comprovante != null
+                        ? Image.file(File(comprovante!.path))
+                        : null,
+                  ),
+                  Divider(),
+                  TextField(
+                    controller: _nomepController,
+                    decoration: InputDecoration(
+                      labelText: 'Nome Popular',
+                    ),
+                  ),
+                  TextField(
+                    controller: _nomecController,
+                    decoration: InputDecoration(
+                      labelText: 'Nome Científico',
+                    ),
+                  ),
+                  TextField(
+                    controller: _descricaoController,
+                    decoration: InputDecoration(
+                      labelText: 'Descrição',
+                    ),
+                  ),
+                  TextField(
+                    controller: _periculosidadeController,
+                    decoration: InputDecoration(
+                      labelText: 'Periculosidade',
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () async {
+                      if (id == null) {
+                        await _addData();
+                      } else {
+                        await _updateData(id);
+                      }
 
-                  if (id != null) {
-                    await _updateData(id);
-                  }
+                      _imgController.text = "";
+                      _nomepController.text = "";
+                      _nomecController.text = "";
+                      _descricaoController.text = "";
+                      _periculosidadeController.text = "";
 
-                  _imgController.text = "";
-                  _nomepController.text = "";
-                  _nomecController.text = "";
-                  _descricaoController.text = "";
-                  _periculosidadeController.text = "";
-
-                  Navigator.pop(context); // Fechar o BottomSheet após salvar os dados
-                },
-                child: Text(id == null ? 'Salvar' : 'Atualizar'),
+                      Navigator.pop(
+                          context); // Fechar o BottomSheet após salvar os dados
+                    },
+                    child: Text(id == null ? 'Salvar' : 'Atualizar'),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         );
       },
     );
+  }
+
+  selecionarFoto() async {
+    final ImagePicker picker = ImagePicker();
+
+    try {
+      XFile? file = await picker.pickImage(source: ImageSource.gallery);
+      if (file != null) setState(() => comprovante = file);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  tirarFoto() async {
+    final ImagePicker picker = ImagePicker();
+
+    try {
+      XFile? file = await picker.pickImage(source: ImageSource.camera);
+      if (file != null) setState(() => comprovante2 = file);
+    } catch (e) {
+      print(e);
+    }
   }
 
   // -------------------------------------------------- CORPO DA PÁGINA ----------------------------------------------
@@ -300,7 +343,8 @@ class _TelaCatalogoAdminState extends State<TelaCatalogoAdmin> {
                                       builder: (context) => TelaPlanta(
                                         img: _allData[index]['img'],
                                         nomePopular: _allData[index]['nome_p'],
-                                        nomeCientifico: _allData[index]['nome_c'],
+                                        nomeCientifico: _allData[index]
+                                            ['nome_c'],
                                         descricao: _allData[index]['descricao'],
                                         periculosidade: _allData[index]
                                             ['periculosidade'],
