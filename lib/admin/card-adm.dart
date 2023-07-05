@@ -1,6 +1,14 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import '../database/db.dart';
+
+// TextField(
+//                 controller: _imgController,
+//                 decoration: InputDecoration(
+//                   labelText: 'Image',
+//                 ),
 
 class CardWidgetADM extends StatefulWidget {
   final String img;
@@ -21,6 +29,8 @@ class CardWidgetADM extends StatefulWidget {
 class _CardWidgetADMState extends State<CardWidgetADM> {
   List<Map<String, dynamic>> _allData = [];
   bool _isLoading = true;
+  XFile? comprovante;
+  XFile? comprovante2;
 
   int id;
   _CardWidgetADMState({required this.id});
@@ -77,13 +87,13 @@ class _CardWidgetADMState extends State<CardWidgetADM> {
     _refreshData();
   }
 
-  void showBottomSheet(id) async {
+  void showBottomSheet(int? id) async {
     if (id != null) {
       final existingData =
           _allData.firstWhere((element) => element['id'] == id);
       _imgController.text = existingData['img'];
-      _nomepController.text = existingData['nome_p'];
-      _nomecController.text = existingData['nome_c'];
+      _nomepController.text = existingData['nomeP'];
+      _nomecController.text = existingData['nomeC'];
       _descricaoController.text = existingData['descricao'];
       _periculosidadeController.text = existingData['periculosidade'];
     }
@@ -91,66 +101,103 @@ class _CardWidgetADMState extends State<CardWidgetADM> {
     showModalBottomSheet(
       context: context,
       builder: (context) {
-        return Container(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              TextField(
-                controller: _imgController,
-                decoration: InputDecoration(
-                  labelText: 'Image',
-                ),
-              ),
-              TextField(
-                controller: _nomepController,
-                decoration: InputDecoration(
-                  labelText: 'Nome Popular',
-                ),
-              ),
-              TextField(
-                controller: _nomecController,
-                decoration: InputDecoration(
-                  labelText: 'Nome Científico',
-                ),
-              ),
-              TextField(
-                controller: _descricaoController,
-                decoration: InputDecoration(
-                  labelText: 'Descrição',
-                ),
-              ),
-              TextField(
-                controller: _periculosidadeController,
-                decoration: InputDecoration(
-                  labelText: 'Periculosidade',
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  if (id == null) {
-                    await _addData();
-                  }
+        return IntrinsicHeight(
+          child: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  Divider(),
+                  ListTile(
+                    leading: Icon(Icons.camera),
+                    title: Text('Tirar foto'),
+                    onTap: tirarFoto,
+                    trailing: comprovante2 != null
+                        ? Image.file(File(comprovante2!.path))
+                        : null,
+                  ),
+                  Divider(),
+                  ListTile(
+                    leading: Icon(Icons.image),
+                    title: Text('Selecionar foto'),
+                    onTap: selecionarFoto,
+                    trailing: comprovante != null
+                        ? Image.file(File(comprovante!.path))
+                        : null,
+                  ),
+                  Divider(),
+                  TextField(
+                    controller: _nomepController,
+                    decoration: InputDecoration(
+                      labelText: 'Nome Popular',
+                    ),
+                  ),
+                  TextField(
+                    controller: _nomecController,
+                    decoration: InputDecoration(
+                      labelText: 'Nome Científico',
+                    ),
+                  ),
+                  TextField(
+                    controller: _descricaoController,
+                    decoration: InputDecoration(
+                      labelText: 'Descrição',
+                    ),
+                  ),
+                  TextField(
+                    controller: _periculosidadeController,
+                    decoration: InputDecoration(
+                      labelText: 'Periculosidade',
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () async {
+                      if (id == null) {
+                        await _addData();
+                      } else {
+                        await _updateData(id);
+                      }
 
-                  if (id != null) {
-                    await _updateData(id);
-                  }
+                      _imgController.text = "";
+                      _nomepController.text = "";
+                      _nomecController.text = "";
+                      _descricaoController.text = "";
+                      _periculosidadeController.text = "";
 
-                  _imgController.text = "";
-                  _nomepController.text = "";
-                  _nomecController.text = "";
-                  _descricaoController.text = "";
-                  _periculosidadeController.text = "";
-
-                  Navigator.pop(
-                      context); // Fechar o BottomSheet após salvar os dados
-                },
-                child: Text(id == null ? 'Salvar' : 'Atualizar'),
+                      Navigator.pop(
+                          context); // Fechar o BottomSheet após salvar os dados
+                    },
+                    child: Text(id == null ? 'Salvar' : 'Atualizar'),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         );
       },
     );
+  }
+
+  selecionarFoto() async {
+    final ImagePicker picker = ImagePicker();
+
+    try {
+      XFile? file = await picker.pickImage(source: ImageSource.gallery);
+      if (file != null) setState(() => comprovante = file);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  tirarFoto() async {
+    final ImagePicker picker = ImagePicker();
+
+    try {
+      XFile? file = await picker.pickImage(source: ImageSource.camera);
+      if (file != null) setState(() => comprovante2 = file);
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
