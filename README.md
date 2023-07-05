@@ -9,7 +9,7 @@
 - Design: [Projeto Figma](https://www.figma.com/file/ZaZovOXTb3cpO4rCx2neiO/PlantIFP2-Prototype?type=design&node-id=0%3A1&mode=design&t=XfxrYnf1SO7zX2aa-1)
 - Flutter;
 - Dart;
-- SQLite;
+- SQLite
 
 ## 🤝 Como contribuir?
 
