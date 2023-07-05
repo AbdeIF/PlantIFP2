@@ -2,14 +2,14 @@
 <img align="center" src="https://i.ibb.co/9qc1G6p/Plantif.png" width="700px">
 
 ## 📰 Documentação
-- [Documentação Completa PlantIFP2](https://docs.google.com/document/d/1tJr8NdMOAyatjlNIeri4SxvhQPti_pPL/edit?usp=sharing&ouid=103052060672860353147&rtpof=true&sd=true)
+- [Documentação PlantIFP2](https://docs.google.com/document/d/1tJr8NdMOAyatjlNIeri4SxvhQPti_pPL/edit?usp=sharing&ouid=103052060672860353147&rtpof=true&sd=true)
 
 ## 💻 Tecnologias
 
 - Design: [Projeto Figma](https://www.figma.com/file/ZaZovOXTb3cpO4rCx2neiO/PlantIFP2-Prototype?type=design&node-id=0%3A1&mode=design&t=XfxrYnf1SO7zX2aa-1)
 - Flutter;
 - Dart;
-- SQLite;
+- SQLite
 
 ## 🤝 Como contribuir?
 
