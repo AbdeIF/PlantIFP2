@@ -101,7 +101,7 @@ class _TelaCatalogoAdminState extends State<TelaCatalogoAdmin> {
                   ),
                   Divider(),
                   ListTile(
-                    leading: Icon(Icons.camera),
+                    leading: Icon(Icons.image),
                     title: Text('Selecionar foto'),
                     onTap: selecionarFoto,
                     trailing: comprovante != null
