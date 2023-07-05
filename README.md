@@ -2,7 +2,7 @@
 <img align="center" src="https://i.ibb.co/9qc1G6p/Plantif.png" width="700px">
 
 ## 📰 Documentação
-- [Documentação PlantIFP2](https://docs.google.com/document/d/1tJr8NdMOAyatjlNIeri4SxvhQPti_pPL/edit?usp=sharing&ouid=103052060672860353147&rtpof=true&sd=true)
+- [Documentação completa PlantIFP2](https://docs.google.com/document/d/1tJr8NdMOAyatjlNIeri4SxvhQPti_pPL/edit?usp=sharing&ouid=103052060672860353147&rtpof=true&sd=true)
 
 ## 💻 Tecnologias
 
