@@ -1,11 +1,13 @@
 import 'dart:io';
-
 import 'package:PlantIFP2/database/db.dart';
 import 'package:flutter/material.dart';
 import '../TelaInfoPlantas.dart';
 import '../scanner.dart';
 import 'card-adm.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' as path;
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart' as syspaths;
 
 class TelaCatalogoAdmin extends StatefulWidget {
   @override
@@ -15,8 +17,8 @@ class TelaCatalogoAdmin extends StatefulWidget {
 class _TelaCatalogoAdminState extends State<TelaCatalogoAdmin> {
   List<Map<String, dynamic>> _allData = [];
   XFile? comprovante;
-  XFile? comprovante2;
-
+  //XFile? comprovante2;
+  String? imagePath;
   bool _isLoading = true;
 
   void _refreshData() async {
@@ -41,33 +43,91 @@ class _TelaCatalogoAdminState extends State<TelaCatalogoAdmin> {
       TextEditingController();
 
   // Adicionar -------------
+
   Future<void> _addData() async {
+    String? fileName;
+
+    if (imagePath != null) {
+      final file = File(imagePath!);
+      final fileNameWithoutExtension = path.basenameWithoutExtension(file.path);
+      final fileExtension = path.extension(file.path);
+
+      final appDir = await syspaths.getApplicationDocumentsDirectory();
+      final savedImagePath =
+          path.join(appDir.path, '$fileNameWithoutExtension$fileExtension');
+
+      await file.copy(savedImagePath);
+      fileName = savedImagePath;
+    }
+
     await DBPlant.createData(
-        _imgController.text,
-        _nomepController.text,
-        _nomecController.text,
-        _descricaoController.text,
-        _periculosidadeController.text);
+      fileName ??
+          '', // Passa o caminho do arquivo ou uma string vazia caso nenhum arquivo tenha sido selecionado
+      _nomepController.text,
+      _nomecController.text,
+      _descricaoController.text,
+      _periculosidadeController.text,
+    );
+
+    _refreshData();
+  }
+  // Future<void> _addData() async {
+  //   await DBPlant.createData(
+  //       _imgController.text,
+  //       _nomepController.text,
+  //       _nomecController.text,
+  //       _descricaoController.text,
+  //       _periculosidadeController.text);
+  //   _refreshData();
+  // }
+
+  // Atualizar -------------
+
+  Future<void> _updateData(int id) async {
+    String? fileName;
+
+    if (imagePath != null) {
+      final file = File(imagePath!);
+      final fileNameWithoutExtension = path.basenameWithoutExtension(file.path);
+      final fileExtension = path.extension(file.path);
+
+      final appDir = await syspaths.getApplicationDocumentsDirectory();
+      final savedImagePath =
+          path.join(appDir.path, '$fileNameWithoutExtension$fileExtension');
+
+      await file.copy(savedImagePath);
+      fileName = savedImagePath;
+    }
+
+    await DBPlant.updateData(
+      id,
+      fileName ??
+          '', // Passa o caminho do arquivo ou uma string vazia caso nenhum arquivo tenha sido selecionado
+      _nomepController.text,
+      _nomecController.text,
+      _descricaoController.text,
+      _periculosidadeController.text,
+    );
+
     _refreshData();
   }
 
-  // Atualizar -------------
-  Future<void> _updateData(int id) async {
-    await DBPlant.updateData(
-        id,
-        _imgController.text,
-        _nomepController.text,
-        _nomecController.text,
-        _descricaoController.text,
-        _periculosidadeController.text);
-    _refreshData();
-  }
+  // Future<void> _updateData(int id) async {
+  //   await DBPlant.updateData(
+  //       id,
+  //       _imgController.text,
+  //       _nomepController.text,
+  //       _nomecController.text,
+  //       _descricaoController.text,
+  //       _periculosidadeController.text);
+  //   _refreshData();
+  // }
 
   // Deletar -------------
   void _deleteData(int id) async {
     await DBPlant.deleteData(id);
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        backgroundColor: Colors.green, content: Text("Planta Deletada!")));
+        backgroundColor: Colors.red, content: Text("Planta Deletada!")));
   }
 
   void showBottomSheet(int? id) async {
@@ -95,8 +155,8 @@ class _TelaCatalogoAdminState extends State<TelaCatalogoAdmin> {
                     leading: Icon(Icons.camera),
                     title: Text('Tirar foto'),
                     onTap: tirarFoto,
-                    trailing: comprovante2 != null
-                        ? Image.file(File(comprovante2!.path))
+                    trailing: comprovante != null
+                        ? Image.file(File(comprovante!.path))
                         : null,
                   ),
                   Divider(),
@@ -177,7 +237,7 @@ class _TelaCatalogoAdminState extends State<TelaCatalogoAdmin> {
 
     try {
       XFile? file = await picker.pickImage(source: ImageSource.camera);
-      if (file != null) setState(() => comprovante2 = file);
+      if (file != null) setState(() => comprovante = file);
     } catch (e) {
       print(e);
     }

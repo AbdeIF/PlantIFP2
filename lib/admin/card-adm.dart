@@ -1,8 +1,10 @@
 import 'dart:io';
-
-import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../database/db.dart';
+import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart' as syspaths;
+
+import 'package:flutter/material.dart';
 
 // TextField(
 //                 controller: _imgController,
@@ -23,17 +25,18 @@ class CardWidgetADM extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<CardWidgetADM> createState() => _CardWidgetADMState(id: id);
+  State<CardWidgetADM> createState() => _CardWidgetADMState(id: id, img: img);
 }
 
 class _CardWidgetADMState extends State<CardWidgetADM> {
+  int id;
+  String img;
   List<Map<String, dynamic>> _allData = [];
   bool _isLoading = true;
   XFile? comprovante;
-  XFile? comprovante2;
+  String? imagePath;
 
-  int id;
-  _CardWidgetADMState({required this.id});
+  _CardWidgetADMState({required this.id, required this.img});
 
   void _refreshData() async {
     final plants = await DBPlant.getAllData();
@@ -49,7 +52,6 @@ class _CardWidgetADMState extends State<CardWidgetADM> {
     _refreshData();
   }
 
-  final TextEditingController _imgController = TextEditingController();
   final TextEditingController _nomepController = TextEditingController();
   final TextEditingController _nomecController = TextEditingController();
   final TextEditingController _descricaoController = TextEditingController();
@@ -57,33 +59,74 @@ class _CardWidgetADMState extends State<CardWidgetADM> {
       TextEditingController();
 
   // Adicionar -------------
+
   Future<void> _addData() async {
+    String? fileName;
+
+    if (imagePath != null) {
+      final file = File(imagePath!);
+      final fileNameWithoutExtension = path.basenameWithoutExtension(file.path);
+      final fileExtension = path.extension(file.path);
+
+      final appDir = await syspaths.getApplicationDocumentsDirectory();
+      final savedImagePath =
+          path.join(appDir.path, '$fileNameWithoutExtension$fileExtension');
+
+      await file.copy(savedImagePath);
+      fileName = savedImagePath;
+    }
+
     await DBPlant.createData(
-        _imgController.text,
-        _nomepController.text,
-        _nomecController.text,
-        _descricaoController.text,
-        _periculosidadeController.text);
+      fileName ?? '',
+      _nomepController.text,
+      _nomecController.text,
+      _descricaoController.text,
+      _periculosidadeController.text,
+    );
+
     _refreshData();
   }
 
-  // Atualizar -------------
-  Future<void> _updateData(id) async {
+// Atualizar -------------
+
+  Future<void> _updateData(int id) async {
+    String? fileName;
+
+    if (imagePath != null) {
+      final file = File(imagePath!);
+      final fileNameWithoutExtension = path.basenameWithoutExtension(file.path);
+      final fileExtension = path.extension(file.path);
+
+      final appDir = await syspaths.getApplicationDocumentsDirectory();
+      final savedImagePath =
+          path.join(appDir.path, '$fileNameWithoutExtension$fileExtension');
+
+      await file.copy(savedImagePath);
+      fileName = savedImagePath;
+    }
+
     await DBPlant.updateData(
-        id,
-        _imgController.text,
-        _nomepController.text,
-        _nomecController.text,
-        _descricaoController.text,
-        _periculosidadeController.text);
+      id,
+      fileName ?? '',
+      _nomepController.text,
+      _nomecController.text,
+      _descricaoController.text,
+      _periculosidadeController.text,
+    );
+
     _refreshData();
   }
 
-  // Deletar -------------
+// Deletar -------------
+
   void _deleteData(id) async {
     await DBPlant.deleteData(id);
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        backgroundColor: Colors.green, content: Text("Planta Deletada!")));
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        backgroundColor: Colors.red,
+        content: Text("Planta Deletada!"),
+      ),
+    );
     _refreshData();
   }
 
@@ -91,7 +134,7 @@ class _CardWidgetADMState extends State<CardWidgetADM> {
     if (id != null) {
       final existingData =
           _allData.firstWhere((element) => element['id'] == id);
-      _imgController.text = existingData['img'];
+      // _imgController.text = existingData['img'];
       _nomepController.text = existingData['nomeP'];
       _nomecController.text = existingData['nomeC'];
       _descricaoController.text = existingData['descricao'];
@@ -112,8 +155,8 @@ class _CardWidgetADMState extends State<CardWidgetADM> {
                     leading: Icon(Icons.camera),
                     title: Text('Tirar foto'),
                     onTap: tirarFoto,
-                    trailing: comprovante2 != null
-                        ? Image.file(File(comprovante2!.path))
+                    trailing: comprovante != null
+                        ? Image.file(File(comprovante!.path))
                         : null,
                   ),
                   Divider(),
@@ -158,7 +201,7 @@ class _CardWidgetADMState extends State<CardWidgetADM> {
                         await _updateData(id);
                       }
 
-                      _imgController.text = "";
+                      // _imgController.text = "";
                       _nomepController.text = "";
                       _nomecController.text = "";
                       _descricaoController.text = "";
@@ -194,7 +237,7 @@ class _CardWidgetADMState extends State<CardWidgetADM> {
 
     try {
       XFile? file = await picker.pickImage(source: ImageSource.camera);
-      if (file != null) setState(() => comprovante2 = file);
+      if (file != null) setState(() => comprovante = file);
     } catch (e) {
       print(e);
     }
