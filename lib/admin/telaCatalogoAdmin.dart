@@ -134,7 +134,6 @@ class _TelaCatalogoAdminState extends State<TelaCatalogoAdmin> {
     if (id != null) {
       final existingData =
           _allData.firstWhere((element) => element['id'] == id);
-      _imgController.text = existingData['img'];
       _nomepController.text = existingData['nomeP'];
       _nomecController.text = existingData['nomeC'];
       _descricaoController.text = existingData['descricao'];
@@ -201,11 +200,14 @@ class _TelaCatalogoAdminState extends State<TelaCatalogoAdmin> {
                         await _updateData(id);
                       }
 
-                      _imgController.text = "";
-                      _nomepController.text = "";
-                      _nomecController.text = "";
-                      _descricaoController.text = "";
-                      _periculosidadeController.text = "";
+                      setState(() {
+                        comprovante = null;
+                      });
+
+                      _nomepController.text = '';
+                      _nomecController.text = '';
+                      _descricaoController.text = '';
+                      _periculosidadeController.text = '';
 
                       Navigator.pop(
                           context); // Fechar o BottomSheet após salvar os dados

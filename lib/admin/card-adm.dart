@@ -226,7 +226,7 @@ class _CardWidgetADMState extends State<CardWidgetADM> {
 
     try {
       XFile? file = await picker.pickImage(source: ImageSource.gallery);
-      if (file != null) setState(() => comprovante = file);
+      if (file != null) setState(() => img = file.path);
     } catch (e) {
       print(e);
     }
